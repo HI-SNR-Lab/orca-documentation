@@ -13,21 +13,16 @@ system_info:
 # On first boot, set the (default) ubuntu user's password to "cryosphere"
 chpasswd:
   expire: false
-  list:
-  - ubuntu:$6$rounds=4096$aQ7tu0.beL3WAL32$fKxKYvZpY7EMCoxAU1heRomA3v8WvgbqBhhz08QwOtQdlP/DJOP2BThqZFoRW8d2a9PaIKK9BC9NHs1qNnkya1
+  users:
+    - name: ubuntu
+      password: $6$rounds=4096$aQ7tu0.beL3WAL32$fKxKYvZpY7EMCoxAU1heRomA3v8WvgbqBhhz08QwOtQdlP/DJOP2BThqZFoRW8d2a9PaIKK9BC9NHs1qNnkya1
+      type: hash
 
 # Enable password authentication with the SSH daemon
 ssh_pwauth: true
 
 # Set a default timezone
 timezone: Etc/UTC
-
-## On first boot, use ssh-import-id to give the specific users SSH access to
-## the default user
-ssh_import_id:
-- gh:thomasteisberg
-- gh:albroome
-- gh:dfxmay
 
 ## Update apt database and upgrade packages on first boot
 package_update: true
