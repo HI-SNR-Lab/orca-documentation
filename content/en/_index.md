@@ -52,5 +52,7 @@ Use our guide to build MAPPERR, a multi-frequency snowmobile-towed ice-penetrati
 {{% /blocks/section %}}
 
 {{% blocks/lead %}}
-ORCA was developed by the Stanford Radio Glaciology Lab. Check out our other cool work [here](https://www.radioglaciology.com)! 
+ORCA is currently being developed by the University of Colorado Boulder in the Hi-SNR Laboratory. Find their website [here](https://hi-snr-lab.github.io/HI-SNR.github.io/)
+
+ORCA was originally developed by the Stanford Radio Glaciology Lab, whose cool work can be found [here](https://www.radioglaciology.com)! 
 {{% /blocks/lead %}}
