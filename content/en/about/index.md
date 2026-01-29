@@ -25,31 +25,46 @@ citation for all uses of ORCA is:
 
 # Contributors
 
-{{< cardpane >}}
-{{< card header="**Dustin Schreoder**" title="Principal Investigator">}}
+## HiSNR Laboratory
 
+{{< cardpane >}}
+
+{{< card header="**Nicole Bienert**" title="Principal Investigator">}}
+{{< fa "fa-solid fa-laptop" "https://hi-snr-lab.github.io/HI-SNR.github.io/" >}}
+{{< fa "fa-solid fa-envelope" "mailto:bienert@colorado.edu" >}}
+{{< /card >}}
+
+{{< card header="**Zoe Worrall**" title="Lead Developer for ORCA">}}
+{{< fa "fab fa-github" "https://github.com/zoe-worrall" >}}
+{{< fa "fa-solid fa-envelope" "mailto:zoe.worrall@colorado.edu" >}}
+{{< /card >}}
+
+{{< /cardpane >}}
+
+##  Radio Glaciology Laboratory
+
+{{< cardpane >}}
+
+{{< card header="**Dustin Schreoder**" title="Principal Investigator">}}
 {{< fa "fa-solid fa-laptop" "https://www.radioglaciology.com/" >}}
 {{< fa "fa-solid fa-envelope" "mailto:Dustin.M.Schroeder@stanford.edu" >}}
-
 {{< /card >}}
-{{< card header="**Anna Broome**" title="Lead Developer for ORCA and MAPPER">}}
 
+{{< card header="**Anna Broome**" title="Lead Developer for ORCA and MAPPER">}}
 {{< fa "fab fa-github" "https://github.com/albroome" >}}
 {{< fa "fa-solid fa-envelope" "mailto:abroome@stanford.edu" >}}
-
 {{< /card >}}
-{{< card header="**Thomas Teisberg**" title="Lead Developer for ORCA and Peregrine" >}}
 
+{{< card header="**Thomas Teisberg**" title="Lead Developer for ORCA and Peregrine" >}}
 {{< fa "fa-solid fa-laptop" "https://www.thomasteisberg.com/" >}}
 {{< fa "fab fa-github" "https://github.com/thomasteisberg" >}}
 {{< fa "fa-solid fa-envelope" "mailto:teisberg@stanford.edu" >}}
-
 {{< /card >}}
+
 {{< card header="**Dennis Woo**" title="Undergraduate Researcher">}}
-
 {{< fa "fab fa-github" "https://github.com/d-enniswoo" >}}
-
 {{< /card >}}
+
 {{< /cardpane >}}
 
 
