@@ -96,18 +96,7 @@ jobs:
         with:
           personal_token: ${{ secrets.HISNR_TOKEN }}
           external_repository: HI-SNR-Lab/HI-SNR.github.io
+          publish_branch: gh-pages
           publish_dir: ./public
           destination_dir: orca
           enable_jekyll: false
-
-  # # Deployment job (Deploy to HiSnrLab)
-  # deploy:
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
