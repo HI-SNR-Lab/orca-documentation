@@ -94,10 +94,11 @@ jobs:
         id: deployment
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.MYSITE_TOKEN }}
+          personal_token: ${{ secrets.HISNR_TOKEN }}
           external_repository: HI-SNR-Lab/HI-SNR.github.io
           publish_dir: ./public
           destination_dir: orca
+          enable_jekyll: false
 
   # # Deployment job (Deploy to HiSnrLab)
   # deploy:
