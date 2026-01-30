@@ -96,6 +96,7 @@ jobs:
         with:
           personal_token: ${{ secrets.HISNR_TOKEN }}
           external_repository: HI-SNR-Lab/HI-SNR.github.io
+          publish_branch: gh-pages
           publish_dir: ./public
           destination_dir: orca
           enable_jekyll: false
