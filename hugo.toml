@@ -1,5 +1,5 @@
 baseURL = "https://hi-snr-lab.github.io/orca/"
-relativeURLs = true
+relativeURLs = false
 canonifyURLs = true
 title = "Open Radar Code Architecture"
 
@@ -90,6 +90,8 @@ section = ["HTML", "print", "RSS"]
 [params]
 copyright = "Anna Broome and Thomas Teisberg"
 #privacy_policy = "https://policies.google.com/privacy"
+
+# baseURLOverride = "/orca/"
 
 # First one is picked as the Twitter card image if not set on page.
 # images = ["images/project-illustration.png"]
