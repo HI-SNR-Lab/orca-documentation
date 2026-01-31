@@ -29,7 +29,7 @@ defaults:
 
 jobs:
   # Build job
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.147.2
@@ -76,18 +76,13 @@ jobs:
             ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
 
-  # Deployment job (Deploy to HiSnrLab)
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
+      # Deployment job (Deploy to HiSnrLab)
       - name: Deploy to HiSnrLab
         id: deployment
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.HISNR_TOKEN }}
-          external_repository: HI-SNR-Lab/HI-SNR.github.io
+          external_repository: hi-snr-lab/HI-SNR.github.io
           publish_branch: gh-pages
           publish_dir: ./public
           destination_dir: orca
