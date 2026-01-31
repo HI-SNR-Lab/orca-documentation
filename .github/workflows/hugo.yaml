@@ -75,10 +75,6 @@ jobs:
           path: |
             ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
-      - name: Upload artifact
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          path: ./public
 
   # Deployment job (Deploy to HiSnrLab)
   deploy:
@@ -95,6 +91,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./public
           destination_dir: orca
+          keep_files: true
           enable_jekyll: false
 
   #   environment:
