@@ -1,6 +1,6 @@
 baseURL = "https://hi-snr-lab.github.io/HI-SNR.github.io/orca/"
-relativeURLs = true
-canonifyURLs = false
+relativeURLs = false
+canonifyURLs = true
 title = "Open Radar Code Architecture"
 
 # Language settings
