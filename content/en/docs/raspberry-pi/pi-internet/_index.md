@@ -17,7 +17,7 @@ These are:
 ### With cloud-init (first-time setup)
 
 The preferred way to setup network interfaces is by providing them in the
-`network-config` file read by [cloud-init when first setting up the Pi]({{< ref "pi-sd-setup" >}}).
+`network-config` file read by [cloud-init when first setting up the Pi]({{< ref "raspberry-pi" >}}).
 
 An example is shown below:
 

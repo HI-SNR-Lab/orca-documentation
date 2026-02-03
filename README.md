@@ -1,7 +1,7 @@
 # Documentation for the Open Radar Code Architecture (ORCA)
 
 This repository contains the source code for ORCA documentation website found
-here: https://radioglaciology.github.io/orca-documentation/
+here: https://hi-snr-lab.github.io/HI-SNR.github.io/orca/
 
 The main ORCA project Github can be found here: https://github.com/radioglaciology/uhd_radar
 
