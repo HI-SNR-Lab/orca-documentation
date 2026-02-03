@@ -22,7 +22,7 @@ You can find lots of online benchmarks of various MicroSD cards, such as [this o
 
 There are two downsides to this approach:
 1. Above 1 TB, MicroSD cards start to get quite expensive.
-2. If you're storing data on the MicroSD card, it's not possible to use [`overlayroot` to protect](/docs/peregrine/payload/pi-sd-setup/#using-overlayroot-to-protect-the-file-system) the file system from corruption.
+2. If you're storing data on the MicroSD card, it's not possible to use [`overlayroot` to protect](/docs/raspberry-pi/#using-overlayroot-to-protect-the-file-system) the file system from corruption.
 
 ### External USB drives
 
