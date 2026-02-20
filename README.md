@@ -3,7 +3,7 @@
 This repository contains the source code for ORCA documentation website found
 here: https://hisnr.com/orca/
 
-The main ORCA project Github can be found here: https://github.com/radioglaciology/uhd_radar
+The main ORCA project Github can be found here: [https://github.com/HI-SNR-Lab/uhd_radar](https://github.com/HI-SNR-Lab/uhd_radar)
 
 ## Editing this documentation
 
