@@ -1,4 +1,4 @@
-baseURL = "https://hisnr.com/orca/"
+baseURL = "https://orca.hisnr.com/"
 relativeURLs = false
 canonifyURLs = true
 title = "Open Radar Code Architecture"
