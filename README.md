@@ -1,7 +1,7 @@
 # Documentation for the Open Radar Code Architecture (ORCA)
 
 This repository contains the source code for ORCA documentation website found
-here: [https://hi-snr-lab.github.io/HI-SNR.github.io/orca/](https://hi-snr-lab.github.io/HI-SNR.github.io/orca/)
+here: https://hisnr.com/orca/
 
 The main ORCA project Github can be found here: [https://github.com/HI-SNR-Lab/uhd_radar](https://github.com/HI-SNR-Lab/uhd_radar)
 
