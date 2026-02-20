@@ -82,10 +82,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.HISNR_TOKEN }}
-          external_repository: hisnr
           publish_branch: gh-pages
           publish_dir: ./public
-          destination_dir: orca
           keep_files: true
           enable_jekyll: false
 
