@@ -82,8 +82,10 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.HISNR_TOKEN }}
+          external_repository: hi-snr-lab/HI-SNR.github.io
           publish_branch: gh-pages
           publish_dir: ./public
+          destination_dir: orca
           keep_files: true
           enable_jekyll: false
 
