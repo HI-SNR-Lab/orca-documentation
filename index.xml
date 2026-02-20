@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Open Radar Code Architecture</title><link>https://orca.hisnr.com/</link><description>Recent content on Open Radar Code Architecture</description><generator>Hugo</generator><language>en</language><atom:link href="https://orca.hisnr.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Connecting to the Raspberry Pi</title><link>https://orca.hisnr.com/docs/peregrine/payload/pi-sd-setup/connect-to-pi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/peregrine/payload/pi-sd-setup/connect-to-pi/</guid><description>&lt;p>By default, the cloud-init script sets up a static IP of &lt;code>192.168.11.137&lt;/code>, but
+you could choose to configure this to something different for each payload box.&lt;/p>
+&lt;p>Our usual way of connecting is by plugging an ethernet cable into the Pi and
+connecting it to a laptop. You can read about
+&lt;a href="https://orca.hisnr.com/docs/peregrine/payload/pi-sd-setup/pi-internet/">all the networking options here&lt;/a>.&lt;/p>
+&lt;h2 id="ssh-agent-forwarding">SSH agent forwarding&lt;/h2>
+&lt;p>If you need to authenticate to GitHub to download code, the recommended way is
+using &lt;a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/using-ssh-agent-forwarding">SSH agent forwarding&lt;/a>.&lt;/p></description></item><item><title>File Formats</title><link>https://orca.hisnr.com/docs/radar/postprocessing/files/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/postprocessing/files/</guid><description/></item><item><title>Compatible hardware</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/hardware/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/sdr-interface/hardware/</guid><description>&lt;h2 id="selecting-a-software-defined-radio-sdr">Selecting a Software-Defined Radio (SDR)&lt;/h2>
+&lt;p>ORCA is built upon the &lt;a href="https://github.com/EttusResearch/uhd">USRP Hardware Driver&lt;/a> (UHD).
+As such, it is theoretically compatible with any &lt;a href="https://www.ettus.com">Ettus&lt;/a> SDR.
+We have primarily tested with B and X series devices (B205mini and X310, in particular),
+however most other Ettus SDRs should work with minor tweaks.&lt;/p>
+&lt;p>The basic capabilities of the two models we regularly use are detailed below:&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>SDR&lt;/th>
+ &lt;th>Frequency Range (GHz)&lt;/th>
+ &lt;th>Bandwidth (MHz)&lt;/th>
+ &lt;th>Channels&lt;/th>
+ &lt;th>Mass (kg)&lt;/th>
+ &lt;th>Approximate Cost (USD)&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;a href="https://www.ettus.com/all-products/x310-kit/">X310&lt;/a> with &lt;a href="https://www.ettus.com/all-products/ubx160/">UBX160&lt;/a>&lt;/td>
+ &lt;td>0.01-6&lt;/td>
+ &lt;td>200&lt;/td>
+ &lt;td>2 TX, 2 RX&lt;/td>
+ &lt;td>1.7&lt;/td>
+ &lt;td>$14,0000&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://www.ettus.com/all-products/usrp-b205mini-i/">B205mini-i&lt;/a>&lt;/td>
+ &lt;td>0.07-6&lt;/td>
+ &lt;td>56&lt;/td>
+ &lt;td>1 TX, 1 RX&lt;/td>
+ &lt;td>0.024&lt;/td>
+ &lt;td>$1,600&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>In general, we recommend B series devices for applications with constraints on
+size, weight, power, or budget. When capabilities beyond the B series are needed,
+we recommend the X series.&lt;/p></description></item><item><title>Sourcing Custom Parts</title><link>https://orca.hisnr.com/docs/peregrine/resources/custom-parts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/peregrine/resources/custom-parts/</guid><description>&lt;p>Many of the parts used to build Peregrine are custom designs. In some instances,
+these may be things you can build yourself if you have the right tools
+(3D printer, laser cutter, etc). In almost all cases, however, it is also
+possible to use our provided design files to order parts from reliable vendors.
+For each type of manufacturing, this page includes some notes about how we
+produce parts or which external vendors we have worked with.&lt;/p></description></item><item><title>Code overview</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/code/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/sdr-interface/code/</guid><description>&lt;h2 id="conda-environment-setup">Conda environment setup&lt;/h2>
+&lt;p>All of the required dependencies can be installed as a conda environment using
+the &lt;code>environment.yaml&lt;/code> file in the repository. More instructions can be found
+in the &lt;a href="https://github.com/radioglaciology/uhd_radar/tree/main?tab=readme-ov-file#configuring-your-environment">README&lt;/a>
+file.&lt;/p>
+&lt;h2 id="startup-scripts">Startup scripts&lt;/h2>
+&lt;p>The X series devices require some initial network configuration. For convenience,
+a &lt;a href="https://github.com/radioglaciology/uhd_radar/blob/main/x310_startup.sh">startup script&lt;/a>
+is provided to automate this setup. You may need to tweak this file to your setup.&lt;/p>
+&lt;h2 id="runner-scripts">Runner scripts&lt;/h2>
+&lt;p>The basic steps required to run the radar are:&lt;/p></description></item><item><title>Processing Functions</title><link>https://orca.hisnr.com/docs/radar/postprocessing/processing-functions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/postprocessing/processing-functions/</guid><description/></item><item><title>Configuration options</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/sdr-interface/config/</guid><description>&lt;p>The entire configuration that controls the radar is defined in a single configuration file. This file is provided at runtime to &lt;code>run.py&lt;/code> and encapsulates all of the settings needed to run various experiments on different hardware setups. Configuration files are specified in the YAML format and contained in the &lt;code>config/&lt;/code> folder of the ORCA repository. Default configuration files are included to run the code on a B205mini-i (&lt;code>default_b205.yaml1&lt;/code>) and on an X310 (&lt;code>default_x310.yaml&lt;/code>). Here we explain the basics behind the settings available to the user via the config file.&lt;/p></description></item><item><title>Postprocessing Notebooks</title><link>https://orca.hisnr.com/docs/radar/postprocessing/notebooks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/postprocessing/notebooks/</guid><description/></item><item><title>Debugging: Real-Time Clocks (RTC)</title><link>https://orca.hisnr.com/docs/peregrine/payload/pi-sd-setup/debugging-rtc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/peregrine/payload/pi-sd-setup/debugging-rtc/</guid><description>&lt;p>A real-time clock (RTC) is a small device equipped with a crystal oscillator and
+a battery that is responsible for keeping track of the current time, even while
+your computer (or Raspberry Pi) is powered off.&lt;/p>
+&lt;p>The &amp;ldquo;Payload Enclosure Divider&amp;rdquo; includes a &lt;a href="https://www.nxp.com/docs/en/data-sheet/PCF8523.pdf">PCF8523&lt;/a>
+RTC and a holder for a CR1220 coin cell battery. The provided &lt;code>user-config&lt;/code> file
+should automatically set this up. As long as you provide internet access to
+the Pi once, it will automatically synchronize the RTC with a network time server
+and everything will just work.&lt;/p></description></item><item><title>Timing and timestamping</title><link>https://orca.hisnr.com/docs/radar/postprocessing/timestamping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/postprocessing/timestamping/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Timestamping of received data is relatively basic and not yet suitable for
+high-precision applications. This page describes the basics as currently implemented.&lt;/p>
+&lt;p>There is significant room to improve on ORCA here. USRP devices are capable of
+multiple means of synchronization between devices that could be used to provide
+better timestamping.&lt;/p>
+
+&lt;/div>
+
+&lt;h2 id="relative-timing-of-samples">Relative timing of samples&lt;/h2>
+&lt;p>Transmit and receive events are scheduled as
+&lt;a href="https://kb.ettus.com/Synchronizing_USRP_Events_Using_Timed_Commands_in_UHD">timed commands&lt;/a>.
+Generally, bursts of samples are recorded at intervals specified by &lt;code>pulse_rep_int&lt;/code>.&lt;/p></description></item><item><title>Host computer transport parameter tuning</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/host-interface/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/sdr-interface/host-interface/</guid><description>&lt;p>The maximum duty cycle you can achieve is a function of the SDR you use, the
+host computer, and the bandwidth you need. This page outlines suggestions for
+how to figure out an achievable duty cycle and what parameters can be tweaked
+to maximize this.&lt;/p>
+&lt;h2 id="general-process-for-benchmarking-duty-cycle">General process for benchmarking duty cycle&lt;/h2>
+&lt;h3 id="determine-the-maximum-achievable-bandwidth-with-benchmark_rate">Determine the maximum achievable bandwidth with benchmark_rate&lt;/h3>
+&lt;p>Use the USRP example benchmark_rate program (located at
+&lt;code>&amp;lt;path to conda install&amp;gt;/envs/&amp;lt;uhd environment name&amp;gt;/lib/uhd/examples&lt;/code>) to
+determine the approximate maximum duty cycle you can achieve. For instance, with
+a Pi 4 and b205mini, I can reach about a 25% duty cycle &amp;ndash; defined as sample
+rate divided by desired sample rate (14 Msps / 56 Msps in this case) &amp;ndash; while
+consistently getting 0 dropped packets.&lt;/p></description></item><item><title>Data Storage Options</title><link>https://orca.hisnr.com/docs/peregrine/payload/data-storage/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/peregrine/payload/data-storage/</guid><description>&lt;p>There are three tested options for how to store your radar data, with various tradeoffs:&lt;/p>
+&lt;ol>
+&lt;li>MicroSD card &amp;ndash; This is the &lt;em>default&lt;/em> option that is assumed in the documentation.&lt;/li>
+&lt;li>External USB SSD or Flash Drive&lt;/li>
+&lt;li>NVMe SSD connected over PCIe interface (Pi 5 only)&lt;/li>
+&lt;/ol>
+&lt;h3 id="microsd-card">MicroSD card&lt;/h3>
+&lt;p>This is the easiest option since it&amp;rsquo;s built-in to the Raspberry Pi and requires no additional space or equipment.&lt;/p>
+&lt;p>MicroSD card quality varies significantly and counterfits are an issue. For this reason, purchasing from a reputable vendor is highly recommended.&lt;/p></description></item><item><title/><link>https://orca.hisnr.com/docs/tgrs_citation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/tgrs_citation/</guid><description>&lt;blockquote>
+&lt;p>T. O. Teisberg, A. L. Broome and D. M. Schroeder, &amp;ldquo;Open Radar Code Architecture (ORCA): A Platform for Software-Defined Coherent Chirped Radar Systems,&amp;rdquo; in &lt;em>IEEE Transactions on Geoscience and Remote Sensing&lt;/em>, vol. 62, pp. 1-11, 2024, Art no. 5109411, doi: 10.1109/TGRS.2024.3446368.&lt;/p>&lt;/blockquote></description></item><item><title>Contributors, Citations, Contact Info, and Acknowledgements</title><link>https://orca.hisnr.com/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/about/</guid><description>&lt;link rel="preload" as="image" href="https://orca.hisnr.com/about/featured-background_hu_5f4e7ae515ba5264.jpg" media="(max-width: 1200px)">
+&lt;link rel="preload" as="image" href="https://orca.hisnr.com/about/featured-background_hu_22af7b7def0795a5.jpg" media="(min-width: 1200px)">
+&lt;style>
+#td-cover-block-0 {
+ background-image: url(/about/featured-background_hu_5f4e7ae515ba5264.jpg);
+}
+@media only screen and (min-width: 1200px) {
+ #td-cover-block-0 {
+ background-image: url(/about/featured-background_hu_22af7b7def0795a5.jpg);
+ }
+}
+&lt;/style>
+&lt;section id="td-cover-block-0" class="row td-cover-block td-cover-block--height-auto js-td-cover td-overlay td-overlay--dark -bg-dark">
+ &lt;div class="col-12">
+ &lt;div class="container td-overlay__inner">
+ &lt;div class="text-center">
+ &lt;h1 class="display-1 mt-0 mt-md-5 pb-4">Contributors, Citations, Contact Info, and Acknowledgements&lt;/h1>
+ 
+ &lt;div class="pt-3 lead">
+ 
+ 
+ 
+ &lt;/div>
+ &lt;/div>
+ &lt;/div>
+ &lt;/div>
+ 
+&lt;/section>
+
+&lt;div>&lt;a id="td-block-1" class="td-offset-anchor">&lt;/a>&lt;/div>
+&lt;section class="row td-box td-box--1 td-box--height-auto">
+&lt;div class="col">
+&lt;div class="container">
+&lt;h1 id="cite-orca-in-your-work">Cite ORCA in your work&lt;/h1>
+&lt;p>If you use ORCA, we would appreciate you citing our work. The currently preferred
+citation for all uses of ORCA is:&lt;/p>
+ &lt;blockquote>
+&lt;p>T. O. Teisberg, A. L. Broome and D. M. Schroeder, &amp;ldquo;Open Radar Code Architecture (ORCA): A Platform for Software-Defined Coherent Chirped Radar Systems,&amp;rdquo; in &lt;em>IEEE Transactions on Geoscience and Remote Sensing&lt;/em>, vol. 62, pp. 1-11, 2024, Art no. 5109411, doi: 10.1109/TGRS.2024.3446368.&lt;/p></description></item><item><title>Customizing user-data</title><link>https://orca.hisnr.com/docs/peregrine/payload/pi-sd-setup/user-data-config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/peregrine/payload/pi-sd-setup/user-data-config/</guid><description>&lt;p>The default user-data we start from is as shown below. You will likely need to
+tweak many of these settings. Descriptions and tips for the most important
+sections are below.&lt;/p>
+&lt;p>Note that this is one of two key configuration files. You can read about
+&lt;a href="https://orca.hisnr.com/docs/peregrine/payload/pi-sd-setup/pi-internet/">network-config here&lt;/a>.&lt;/p>
+&lt;h2 id="starting-point-user-data-file">Starting point user-data file&lt;/h2>
+
+
+ 
+
+
+
+
+	
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#cloud-config&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># This is the user-data configuration file for cloud-init.&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># The cloud-init documentation has more details:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">#&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># https://cloudinit.readthedocs.io/&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">system_info&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">default_user&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">ubuntu&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Allow the default user to shutdown or reboot the system without entering a password (used by our automated scripts)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">sudo&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># On first boot, set the (default) ubuntu user&amp;#39;s password to &amp;#34;cryosphere&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">chpasswd&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">expire&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">users&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">ubuntu&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">password&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">$6$rounds=4096$aQ7tu0.beL3WAL32$fKxKYvZpY7EMCoxAU1heRomA3v8WvgbqBhhz08QwOtQdlP/DJOP2BThqZFoRW8d2a9PaIKK9BC9NHs1qNnkya1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">type&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hash&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Enable password authentication with the SSH daemon&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">ssh_pwauth&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Set a default timezone&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">timezone&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Etc/UTC&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">## Update apt database and upgrade packages on first boot&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">package_update&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">package_upgrade&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">## Install additional packages on first boot&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">packages&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">net-tools&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">git&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">cmake&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">g++&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">mosh&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">exfat-fuse&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">i2c-tools&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">rpi.gpio-common&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">util-linux-extra&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">## Write arbitrary files to the file-system&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">write_files&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/home/ubuntu/initial_setup.sh&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">content&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">|&lt;/span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> #!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> exec &amp;gt; &amp;gt;(tee -a &amp;#34;initial_setup_output.log&amp;#34;) 2&amp;gt;&amp;amp;1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> # Miniconda Setup
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> wget --progress=bar:force:noscroll &amp;#34;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh&amp;#34; -O $HOME/miniconda.sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> bash $HOME/miniconda.sh -b -p $HOME/miniconda
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> cd $HOME
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> source .profile
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> source miniconda/etc/profile.d/conda.sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> conda init bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> # Setup logger environment
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> git clone git@github.com:thomasteisberg/uav_radar_logger.git
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> # Clone uhd_radar repo
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> git clone git@github.com:radioglaciology/uhd_radar.git
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> cd uhd_radar
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> #git checkout thomas/dask # Uncomment if you want to check out a specific branch other than main
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> conda env create -n uhd -f environment-rpi.yaml
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> conda activate uhd
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> python /home/ubuntu/miniconda/envs/uhd/lib/uhd/utils/uhd_images_downloader.py
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> systemctl --user enable radar.service
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> systemctl --user enable logger.service
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> ifconfig
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> sudo reboot&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">append&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/home/ubuntu/.profile&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">content&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">|&lt;/span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> PATH=/home/ubuntu/miniconda/bin:$PATH
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> source /home/ubuntu/.bashrc&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">append&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/home/ubuntu/.ssh/known_hosts&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">content&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">|&lt;/span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/etc/security/limits.conf&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Recommended by Ettus https://kb.ettus.com/USRP_Host_Performance_Tuning_Tips_and_Tricks&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">content&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">|&lt;/span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> ubuntu - rtprio 99&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">append&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/etc/systemd/user/radar.service&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">content&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">|&lt;/span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> [Unit]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> Description=Service to run the radar code on startup
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> [Service]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> Type=simple
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> WorkingDirectory=/home/ubuntu/uhd_radar/
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> ExecStart=/home/ubuntu/uhd_radar/manager/radar_service.sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> Restart=always
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> RestartSec=10
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> KillSignal=SIGINT
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> [Install]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> WantedBy=default.target&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/etc/systemd/user/logger.service&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">content&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">|&lt;/span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> [Unit]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> Description=Service to log data from I2C sensors and automatically shutdown below a voltage threshold
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> [Service]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> Type=simple
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> WorkingDirectory=/home/ubuntu/uav_radar_logger/
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> ExecStart=/home/ubuntu/uav_radar_logger/logger_service.sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> Restart=always
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> RestartSec=60
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> KillSignal=SIGINT
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> [Install]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"> WantedBy=default.target&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Run arbitrary commands at rc.local like time&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># These commands are run with root permissions&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># If you want commands run as a normal user, put them in initial_setup.sh (see above)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># which is run as the &amp;#34;ubuntu&amp;#34; user (see below)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">runcmd&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">chown -R ubuntu:ubuntu /home/ubuntu&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">chmod +x /home/ubuntu/initial_setup.sh&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">wget -O /etc/udev/rules.d/uhd-usrp.rules https://raw.githubusercontent.com/EttusResearch/uhd/master/host/utils/uhd-usrp.rules&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">usermod -a -G i2c ubuntu&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">usermod -a -G dialout ubuntu&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">usermod -a -G tty ubuntu&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">apt remove -y modemmanager&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">systemctl stop serial-getty@ttyS0.service &amp;amp;&amp;amp; systemctl disable serial-getty@ttyS0.service&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">i2cdetect -y 1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">echo &amp;#34;dtoverlay=i2c-rtc,pcf8523&amp;#34; &amp;gt;&amp;gt; /boot/firmware/config.txt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">loginctl enable-linger ubuntu&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">mkdir /media/ssd&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">chown ubuntu /media/ssd&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">chgrp ubuntu /media/ssd&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#000">echo &amp;#34;/dev/sda2 /media/ssd exfat defaults,nofail,uid=1000,gid=1000 0 2&amp;#34; | tee -a /etc/fstab&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+
+
+&lt;h2 id="password-less-shutdown">Password-less shutdown&lt;/h2>
+&lt;pre tabindex="0">&lt;code>system_info:
+ default_user:
+ name: ubuntu # Allow the default user to shutdown or reboot the system without entering a password (used by our automated scripts)
+ sudo: &amp;#34;ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>One of the features supported by the uav_radar_logger utility is to automatically
+cleanly shutdown the system if the measured battery voltage drops below a
+threshold. To facilitate this, the default user must be able to shutdown the
+system without needing additional authentication. This gives permission for the
+&lt;code>ubuntu&lt;/code> user to call &lt;code>sudo shutdown&lt;/code> or &lt;code>sudo reboot&lt;/code> without entering a password.&lt;/p></description></item><item><title>Search Results</title><link>https://orca.hisnr.com/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/search/</guid><description/></item></channel></rss>

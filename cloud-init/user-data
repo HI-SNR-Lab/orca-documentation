@@ -1,0 +1,138 @@
+#cloud-config
+
+# This is the user-data configuration file for cloud-init.
+# The cloud-init documentation has more details:
+#
+# https://cloudinit.readthedocs.io/
+
+system_info:
+  default_user:
+    name: ubuntu # Allow the default user to shutdown or reboot the system without entering a password (used by our automated scripts)
+    sudo: "ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown"
+
+# On first boot, set the (default) ubuntu user's password to "cryosphere"
+chpasswd:
+  expire: false
+  users:
+    - name: ubuntu
+      password: $6$rounds=4096$aQ7tu0.beL3WAL32$fKxKYvZpY7EMCoxAU1heRomA3v8WvgbqBhhz08QwOtQdlP/DJOP2BThqZFoRW8d2a9PaIKK9BC9NHs1qNnkya1
+      type: hash
+
+# Enable password authentication with the SSH daemon
+ssh_pwauth: true
+
+# Set a default timezone
+timezone: Etc/UTC
+
+## Update apt database and upgrade packages on first boot
+package_update: true
+package_upgrade: true
+
+## Install additional packages on first boot
+packages:
+- net-tools
+- git
+- cmake
+- g++
+- mosh
+- exfat-fuse
+- i2c-tools
+- rpi.gpio-common
+- util-linux-extra
+
+## Write arbitrary files to the file-system
+write_files:
+- path: /home/ubuntu/initial_setup.sh
+  content: |
+    #!/bin/bash
+    exec > >(tee -a "initial_setup_output.log") 2>&1
+    # Miniconda Setup
+    wget --progress=bar:force:noscroll "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh" -O $HOME/miniconda.sh
+    bash $HOME/miniconda.sh -b -p $HOME/miniconda
+    cd $HOME
+    source .profile
+    source miniconda/etc/profile.d/conda.sh
+    conda init bash
+    # Setup logger environment
+    git clone git@github.com:thomasteisberg/uav_radar_logger.git
+    # Clone uhd_radar repo
+    git clone git@github.com:radioglaciology/uhd_radar.git
+    cd uhd_radar
+    #git checkout thomas/dask # Uncomment if you want to check out a specific branch other than main
+    conda env create -n uhd -f environment-rpi.yaml
+    conda activate uhd
+    python /home/ubuntu/miniconda/envs/uhd/lib/uhd/utils/uhd_images_downloader.py
+    systemctl --user enable radar.service
+    systemctl --user enable logger.service
+    ifconfig
+    sudo reboot
+  append: true
+- path: /home/ubuntu/.profile
+  content: |
+    PATH=/home/ubuntu/miniconda/bin:$PATH
+    source /home/ubuntu/.bashrc
+  append: true
+- path: /home/ubuntu/.ssh/known_hosts
+  content: |
+    github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+    github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
+    github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=
+- path: /etc/security/limits.conf # Recommended by Ettus https://kb.ettus.com/USRP_Host_Performance_Tuning_Tips_and_Tricks
+  content: |
+    ubuntu    - rtprio    99
+  append: true
+- path: /etc/systemd/user/radar.service
+  content: |
+    [Unit]
+    Description=Service to run the radar code on startup
+
+    [Service]
+    Type=simple
+    WorkingDirectory=/home/ubuntu/uhd_radar/
+    ExecStart=/home/ubuntu/uhd_radar/manager/radar_service.sh
+
+    Restart=always
+    RestartSec=10
+
+    KillSignal=SIGINT
+
+    [Install]
+    WantedBy=default.target
+- path: /etc/systemd/user/logger.service
+  content: |
+    [Unit]
+    Description=Service to log data from I2C sensors and automatically shutdown below a voltage threshold
+
+    [Service]
+    Type=simple
+    WorkingDirectory=/home/ubuntu/uav_radar_logger/
+    ExecStart=/home/ubuntu/uav_radar_logger/logger_service.sh
+
+    Restart=always
+    RestartSec=60
+
+    KillSignal=SIGINT
+
+    [Install]
+    WantedBy=default.target
+
+# Run arbitrary commands at rc.local like time
+# These commands are run with root permissions
+# If you want commands run as a normal user, put them in initial_setup.sh (see above)
+# which is run as the "ubuntu" user (see below)
+runcmd:
+- chown -R ubuntu:ubuntu /home/ubuntu
+- chmod +x /home/ubuntu/initial_setup.sh
+- wget -O /etc/udev/rules.d/uhd-usrp.rules https://raw.githubusercontent.com/EttusResearch/uhd/master/host/utils/uhd-usrp.rules
+- usermod -a -G i2c ubuntu
+- usermod -a -G dialout ubuntu
+- usermod -a -G tty ubuntu
+- apt remove -y modemmanager
+- systemctl stop serial-getty@ttyS0.service && systemctl disable serial-getty@ttyS0.service
+- i2cdetect -y 1
+- echo "dtoverlay=i2c-rtc,pcf8523" >> /boot/firmware/config.txt
+- loginctl enable-linger ubuntu
+- mkdir /media/ssd
+- chown ubuntu /media/ssd
+- chgrp ubuntu /media/ssd
+- echo "/dev/sda2  /media/ssd  exfat  defaults,nofail,uid=1000,gid=1000  0  2" | tee -a /etc/fstab

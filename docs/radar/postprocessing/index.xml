@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Postprocessing on Open Radar Code Architecture</title><link>https://orca.hisnr.com/docs/radar/postprocessing/</link><description>Recent content in Postprocessing on Open Radar Code Architecture</description><generator>Hugo</generator><language>en</language><atom:link href="https://orca.hisnr.com/docs/radar/postprocessing/index.xml" rel="self" type="application/rss+xml"/><item><title>File Formats</title><link>https://orca.hisnr.com/docs/radar/postprocessing/files/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/postprocessing/files/</guid><description/></item><item><title>Processing Functions</title><link>https://orca.hisnr.com/docs/radar/postprocessing/processing-functions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/postprocessing/processing-functions/</guid><description/></item><item><title>Postprocessing Notebooks</title><link>https://orca.hisnr.com/docs/radar/postprocessing/notebooks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/postprocessing/notebooks/</guid><description/></item><item><title>Timing and timestamping</title><link>https://orca.hisnr.com/docs/radar/postprocessing/timestamping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/postprocessing/timestamping/</guid><description>&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Timestamping of received data is relatively basic and not yet suitable for
+high-precision applications. This page describes the basics as currently implemented.&lt;/p>
+&lt;p>There is significant room to improve on ORCA here. USRP devices are capable of
+multiple means of synchronization between devices that could be used to provide
+better timestamping.&lt;/p>
+
+&lt;/div>
+
+&lt;h2 id="relative-timing-of-samples">Relative timing of samples&lt;/h2>
+&lt;p>Transmit and receive events are scheduled as
+&lt;a href="https://kb.ettus.com/Synchronizing_USRP_Events_Using_Timed_Commands_in_UHD">timed commands&lt;/a>.
+Generally, bursts of samples are recorded at intervals specified by &lt;code>pulse_rep_int&lt;/code>.&lt;/p></description></item></channel></rss>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Radar Code on Open Radar Code Architecture</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/</link><description>Recent content in Radar Code on Open Radar Code Architecture</description><generator>Hugo</generator><language>en</language><atom:link href="https://orca.hisnr.com/docs/radar/sdr-interface/index.xml" rel="self" type="application/rss+xml"/><item><title>Compatible hardware</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/hardware/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/sdr-interface/hardware/</guid><description>&lt;h2 id="selecting-a-software-defined-radio-sdr">Selecting a Software-Defined Radio (SDR)&lt;/h2>
+&lt;p>ORCA is built upon the &lt;a href="https://github.com/EttusResearch/uhd">USRP Hardware Driver&lt;/a> (UHD).
+As such, it is theoretically compatible with any &lt;a href="https://www.ettus.com">Ettus&lt;/a> SDR.
+We have primarily tested with B and X series devices (B205mini and X310, in particular),
+however most other Ettus SDRs should work with minor tweaks.&lt;/p>
+&lt;p>The basic capabilities of the two models we regularly use are detailed below:&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>SDR&lt;/th>
+ &lt;th>Frequency Range (GHz)&lt;/th>
+ &lt;th>Bandwidth (MHz)&lt;/th>
+ &lt;th>Channels&lt;/th>
+ &lt;th>Mass (kg)&lt;/th>
+ &lt;th>Approximate Cost (USD)&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;a href="https://www.ettus.com/all-products/x310-kit/">X310&lt;/a> with &lt;a href="https://www.ettus.com/all-products/ubx160/">UBX160&lt;/a>&lt;/td>
+ &lt;td>0.01-6&lt;/td>
+ &lt;td>200&lt;/td>
+ &lt;td>2 TX, 2 RX&lt;/td>
+ &lt;td>1.7&lt;/td>
+ &lt;td>$14,0000&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;a href="https://www.ettus.com/all-products/usrp-b205mini-i/">B205mini-i&lt;/a>&lt;/td>
+ &lt;td>0.07-6&lt;/td>
+ &lt;td>56&lt;/td>
+ &lt;td>1 TX, 1 RX&lt;/td>
+ &lt;td>0.024&lt;/td>
+ &lt;td>$1,600&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>In general, we recommend B series devices for applications with constraints on
+size, weight, power, or budget. When capabilities beyond the B series are needed,
+we recommend the X series.&lt;/p></description></item><item><title>Code overview</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/code/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/sdr-interface/code/</guid><description>&lt;h2 id="conda-environment-setup">Conda environment setup&lt;/h2>
+&lt;p>All of the required dependencies can be installed as a conda environment using
+the &lt;code>environment.yaml&lt;/code> file in the repository. More instructions can be found
+in the &lt;a href="https://github.com/radioglaciology/uhd_radar/tree/main?tab=readme-ov-file#configuring-your-environment">README&lt;/a>
+file.&lt;/p>
+&lt;h2 id="startup-scripts">Startup scripts&lt;/h2>
+&lt;p>The X series devices require some initial network configuration. For convenience,
+a &lt;a href="https://github.com/radioglaciology/uhd_radar/blob/main/x310_startup.sh">startup script&lt;/a>
+is provided to automate this setup. You may need to tweak this file to your setup.&lt;/p>
+&lt;h2 id="runner-scripts">Runner scripts&lt;/h2>
+&lt;p>The basic steps required to run the radar are:&lt;/p></description></item><item><title>Configuration options</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/sdr-interface/config/</guid><description>&lt;p>The entire configuration that controls the radar is defined in a single configuration file. This file is provided at runtime to &lt;code>run.py&lt;/code> and encapsulates all of the settings needed to run various experiments on different hardware setups. Configuration files are specified in the YAML format and contained in the &lt;code>config/&lt;/code> folder of the ORCA repository. Default configuration files are included to run the code on a B205mini-i (&lt;code>default_b205.yaml1&lt;/code>) and on an X310 (&lt;code>default_x310.yaml&lt;/code>). Here we explain the basics behind the settings available to the user via the config file.&lt;/p></description></item><item><title>Host computer transport parameter tuning</title><link>https://orca.hisnr.com/docs/radar/sdr-interface/host-interface/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://orca.hisnr.com/docs/radar/sdr-interface/host-interface/</guid><description>&lt;p>The maximum duty cycle you can achieve is a function of the SDR you use, the
+host computer, and the bandwidth you need. This page outlines suggestions for
+how to figure out an achievable duty cycle and what parameters can be tweaked
+to maximize this.&lt;/p>
+&lt;h2 id="general-process-for-benchmarking-duty-cycle">General process for benchmarking duty cycle&lt;/h2>
+&lt;h3 id="determine-the-maximum-achievable-bandwidth-with-benchmark_rate">Determine the maximum achievable bandwidth with benchmark_rate&lt;/h3>
+&lt;p>Use the USRP example benchmark_rate program (located at
+&lt;code>&amp;lt;path to conda install&amp;gt;/envs/&amp;lt;uhd environment name&amp;gt;/lib/uhd/examples&lt;/code>) to
+determine the approximate maximum duty cycle you can achieve. For instance, with
+a Pi 4 and b205mini, I can reach about a 25% duty cycle &amp;ndash; defined as sample
+rate divided by desired sample rate (14 Msps / 56 Msps in this case) &amp;ndash; while
+consistently getting 0 dropped packets.&lt;/p></description></item></channel></rss>
