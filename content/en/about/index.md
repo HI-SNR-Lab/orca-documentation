@@ -12,6 +12,14 @@ menu: {main: {weight: 100, pre: "<i class='fa-solid fa-people-group'></i>"}}
 
 {{% blocks/section %}}
 
+# Use Code for ORCA
+
+Find the code for ORCA at the [GitHub website](https://github.com/HI-SNR-Lab/uhd_radar). ORCA is contained in a folder called uhd_radar. The supplied link give useful information on how to install ORCA, history of past updates, and how to run the code.
+
+{{% /blocks/section %}}
+
+{{% blocks/section %}}
+
 # Cite ORCA in your work
 
 If you use ORCA, we would appreciate you citing our work. The currently preferred
@@ -30,13 +38,18 @@ citation for all uses of ORCA is:
 {{< cardpane >}}
 
 {{< card header="**Nicole Bienert**" title="Principal Investigator">}}
-{{< fa "fa-solid fa-laptop" "https://hi-snr-lab.github.io/HI-SNR.github.io/" >}}
+{{< fa "fa-solid fa-github" "https://hi-snr-lab.github.io/HI-SNR.github.io/" >}}
 {{< fa "fa-solid fa-envelope" "mailto:bienert@colorado.edu" >}}
 {{< /card >}}
 
 {{< card header="**Zoe Worrall**" title="Lead Developer for ORCA">}}
 {{< fa "fab fa-github" "https://github.com/zoe-worrall" >}}
 {{< fa "fa-solid fa-envelope" "mailto:zoe.worrall@colorado.edu" >}}
+{{< /card >}}
+
+{{< card header="**Chris Barbarie**" title="Lead Developer for ORCA">}}
+{{< fa "fab fa-github" "https://github.com/christopherbarbarie" >}}
+{{< fa "fa-solid fa-envelope" "mailto:Christopher.Barbarie@colorado.edu" >}}
 {{< /card >}}
 
 {{< /cardpane >}}
