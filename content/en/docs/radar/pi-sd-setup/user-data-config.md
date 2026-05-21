@@ -1,15 +1,17 @@
 ---
-title: Customizing user-data
-#description: 
-#weight: 10
+title: 2 - Default Setup for the Raspberry Pi
+description: Default configurations for all files on the Raspberry Pi.
+weight: 10
 ---
+
+Use this when setting up your Raspberry Pi on initial boot-up.
 
 The default user-data we start from is as shown below. You will likely need to
 tweak many of these settings. Descriptions and tips for the most important
 sections are below.
 
 Note that this is one of two key configuration files. You can read about
-[network-config here]({{< ref "pi-internet" >}}).
+[network-config here]({{< ref "network" >}}).
 
 ## Starting point user-data file
 

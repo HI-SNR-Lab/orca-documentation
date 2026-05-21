@@ -1,8 +1,8 @@
 ---
-title: Code overview
-linkTitle: Code Overview
+title: Runtime overview
+linkTitle: 3 - Runtime Overview
 description: Overview of the code's architecture
-weight: 20
+weight: 10
 ---
 
 ## Conda environment setup

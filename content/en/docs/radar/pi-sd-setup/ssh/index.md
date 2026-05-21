@@ -1,17 +1,48 @@
 ---
-title: Connecting to the Raspberry Pi
-#description: 
+title: Connect and Control Options
+linkTitle: 4 - Connecting to Pi
+description: Options for connecting to the Raspberry Pi in order to transmit desired data or set parameters.
 weight: 10
 ---
 
-By default, the cloud-init script sets up a static IP of `192.168.11.137`, but
-you could choose to configure this to something different for each payload box.
+Most of the time, the Pi doesn't need an internet connection. There are, however,
+a couple of cases where you may want some sort of a network connection to the Pi.
 
-Our usual way of connecting is by plugging an ethernet cable into the Pi and
-connecting it to a laptop. You can read about
-[all the networking options here]({{< ref "pi-internet" >}}).
+These are:
+1. Downloading data from the Pi to a computer (requires a network connection but not internet)
+2. Initial setup with cloud-init (requires internet)
+3. Updating code by pulling from GitHub (requires internet)
 
-## SSH agent forwarding
+There are three potential ways to communicate with the Raspberry Pi; **direct control**, **ethernet**, or via **Wi-Fi**. 
+The Raspberry Pi as set up does not have a graphical user interface (GUI). After initial set-up, if the user wants
+to add remote access or move files onto the Pi, they wil need to do so using direct control. Direct control uses Secure 
+Shell (ssh) protocol.
+
+## Direct Control
+
+To access the Pi’s terminal directly you will need: 
+1. Raspberry Pi 5 
+2. Pi Power Supply (plugged into wall) 
+3. Monitor (plugged into wall) 
+4. HDMI to Micro-HDMI cable 
+5. Keyboard 
+6. Ethernet cable connected to a router (or ethernet port on the wall of the lab)
+
+Connect the ethernet (or just use Wi-Fi), micro-HDMI, keyboard, and power supply to the Raspberry Pi. When 
+it boots, you will see the Pi’s Ubuntu Server terminal on the monitor and can log in and run commands 
+directly with the keyboard (no mouse inputs). There is no way to scroll up through this terminal, so if 
+you want to be able to read a long output from a command you must pipe it into a file (ex. `python run.py >> 
+terminal_output.txt`), then read the text file using nano. 
+
+After you have connected to the Raspberry Pi using direct control, it is possible to configure
+the computer to use SSH so that you can log in to the Pi on your computer (via Ethernet or via Wi-Fi).
+
+To do so, you need to set up SSH agent forwarding, or confirm that it is already running.
+
+Confirm that SSH agent forwarding (i.e. a remote server can access the local SSH agent on your behalf) 
+is working properly by running `ssh -T git@github.com`.
+
+### SSH Agent Forwarding
 
 If you need to authenticate to GitHub to download code, the recommended way is
 using [SSH agent forwarding](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/using-ssh-agent-forwarding).
@@ -19,7 +50,7 @@ using [SSH agent forwarding](https://docs.github.com/en/authentication/connectin
 To summarize the above link, you should make sure you have
 [an SSH key setup with your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys).
 
-Test this by running `ssh -T git@github.com`.
+Test this by running `ssh -T git@github.com`. 
 
 {{% alert title="Setup an SSH Key" color="info" %}}
 
@@ -47,9 +78,9 @@ You then need to add this SSH to the Pi. The simplest method is to first add the
 
 {{% /alert %}}
 
-You should now have permission to SSH into the Pi from your laptop using one of the following methods. 
+You should now have permission to SSH into the Pi from your laptop using direct control, ethernet, or Wi-Fi. 
 
-Then modify your `~/.ssh/config` file to have an entry like this enabling
+Modify your `~/.ssh/config` file (use `nano ~/.ssh/config`) and add an entry like this enabling
 SSH agent forwarding:
 
 ```
@@ -59,15 +90,7 @@ Host 192.168.11.137
     ForwardAgent yes
 ```
 
-
-## SSH'ing to your Pi
-
-Connect to the Raspberry Pi over SSH:
-
-```
-ssh ubuntu@192.168.11.137
-```
-
+Note that if your username or host IP address is different, you should adjust it accordingly.
 
 {{% alert title="Remote host identification has changed" color="info" %}}
 If you use the same static IP for multiple Pi's (which, presumably, you only
@@ -96,28 +119,10 @@ know exactly why you're getting this error. You should only have to do this once
 per new Pi.)
 {{% /alert %}}
 
-You can test that your SSH agent forwarding is working by running
-`ssh -T git@github.com` again while SSH'd into your Pi.
+Once this is set up properly, it is possible to connect to the Raspberry Pi through your computer (Ethernet) or through Wi-Fi, so long as the Raspberry Pi remains powered.
 
-## Types of Control
 
-There are three potential ways to control the Raspberry Pi; direct control, ethernet, or WiFi.
-
-### Direct Control
-
-This method requires a monitor and keyboard, cannot be used to share files between a laptop and the Pi, and is more difficult to use. **I would only recommend this method if it were needed while setting up an SSH connection from your laptop, or you are unable to use the alternate methods.**
-
-To access the Pi’s terminal directly you will need: 
-1. Raspberry Pi 5 
-2. Pi Power Supply (plugged into wall) 
-3. Monitor (plugged into wall) 
-4. HDMI to Micro-HDMI cable 
-5. Keyboard 
-6. Ethernet cable connected to a router (or ethernet port on the wall of the lab)
-
-Connect the ethernet (or just use WiFi), micro-HDMI, keyboard, and power supply to the Raspberry Pi. When it boots, you will see the Pi’s Ubuntu Server terminal on the monitor and can log in and run commands directly with the keyboard (no mouse inputs). There is no way to scroll up through this terminal however, so if you want to be able to read a long output from a command you must pipe it into a file (ex. python run.py >> terminal_output.txt), then read the text file using nano. 
-
-### SSH over Ethernet
+## SSH over Ethernet
 
 **This is the preferred method for connecting to and controlling the Pi**, and the only method that does not require the Pi to be connected to a router or Wi-Fi network. However, it does take a bit of setup the first time.
 
@@ -128,11 +133,83 @@ For this method, you will need:
 4. Ethernet cable 
 5. Ethernet to usb-c adapter (if your laptop doesn’t have an ethernet port) 
 
+
+### Configuring your computer
+
+If you're connecting to the Pi via a simple ethernet cable to your computer,
+you'll want both configured with static IPs. The config file above will do this
+on the Pi side. On your computer, you'll want to set a static IP of `192.168.11.1`
+and a netmask of `255.255.255.0`. For example, your settings may look like this:
+
+{{% imgproc network-settings Fit "800x400" %}}
+Example laptop configuration to connect to the Pi over an ethernet cable
+{{% /imgproc %}}
+
+### Sharing internet from your computer
+
+
 {{% alert title="Common Mac Problem" %}}
 
-Keep in mind that, especially if you are on a network with a firewall and you are using a more recent MacBook, due to how Mac routes Wi-Fi, the Raspberry Pi's internet connection will either be difficult or impossible. SSH via Ethernet is most likely to work on a Windows or Linux machines. If you are using a Mac on university Wi-Fi, and can ping the Raspberry Pi but the Pi cannot connect to the network, you will likely need to either use a different network on your computer, contact your university's IT department, or use a different Control Type.
+Keep in mind that, especially if you are on a network with a firewall and you are 
+using a more recent MacBook, due to how Mac routes Wi-Fi, the Raspberry Pi's internet 
+connection will either be difficult or impossible. SSH via Ethernet is most likely 
+to work on a Windows or Linux machines. If you are using a Mac on university Wi-Fi, 
+and can ping the Raspberry Pi but the Pi cannot connect to the network, you will 
+likely need to either use a different network on your computer, contact your 
+university's IT department, or use a different Control Type.
 
 {{% /alert %}}
+
+{{% alert title="Do you need to do this?" color="info" %}}
+This process is a little annoying to setup. If you can easily connect your Pi
+to a separate Wi-Fi network with internet access, you probably don't need to do this.
+
+If your Wi-Fi network requires complicated configuration to join, requires a key
+or password you don't want to leave around on the Pi, or only allows some devices
+to join, this is an alternative approach that only requires a separate computer
+(i.e. your laptop) to have internet access.
+{{% /alert %}}
+
+Sharing your computer's internet connection from one network interface to another
+is a useful trick to get an internet connection for the Pi. This can be done
+between any two network interfaces (i.e. from your Wi-Fi connection to the Pi over
+ethernet or from one WiFi card to a network created by a second Wi-Fi card).
+
+The Arch Linux wiki has useful instructions for configuring
+[internet sharing on Linux](https://wiki.archlinux.org/title/Internet_sharing).
+
+To briefly summarize them:
+
+All of this setup will happen on your laptop (or whatever computer has an
+internet connection).
+
+1. Enable IPv4 forwarding: `sudo sysctl net.ipv4.ip_forward=1`
+2. Setup NAT with iptables: (See note below if you have docker installed!)
+
+```
+sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+sudo iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i net0 -o wlan0 -j ACCEPT
+```
+
+Where `wlan0` should be replaced with the name of the network interface on
+your computer which is currently connected to the internet, and `net0` should
+be replaced with the name of the network interface on the same computer which is
+connected to the Pi.
+
+{{% alert title="Note for Docker users" color="warning" %}}
+If you have docker installed on your system, it
+[changes your default firewall settings](https://docs.docker.com/network/packet-filtering-firewalls/)
+. As a result, you need to setup NAT slightly differently:
+
+```
+sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+sudo iptables -I DOCKER-USER 1 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -I DOCKER-USER 2 -i net0 -o wlan0 -j ACCEPT
+```
+{{% /alert %}}
+
+### Connecting to Wi-Fi through Ethernet
 
 **Process**
 1. Plug the power supply into the Pi and plug one end of the ethernet cable into the Pi, and the other into your laptop. 
@@ -159,7 +236,7 @@ Keep in mind that, especially if you are on a network with a firewall and you ar
 
 1. Run `ssh ubuntu@<pi-ip-address>` to connect to the Pi. You can now run commands on the Pi, and transfer files to and from your laptop using SCP (see below).
 
-### SSH over Wi-Fi
+## SSH over Wi-Fi
 
 This method is nice as it requires less cables and can be used for connecting multiple devices, **however you will have to use one of the other methods such as SSH over Ethernet initially to find the Pi’s internet IP address.** 
 
@@ -193,77 +270,3 @@ You can also send a whole folder with `scp -r <my-directory-path> ubuntu@<pi-ip-
 To send files from the Pi back to your laptop, reverse the two arguments ensuring the first is one or more files, or directory, and the second is a directory for where the file should go.  
 
 ex. `scp ubuntu@10.42.0.10:~/uhd_radar/data/20250716* ~/uhd_radar/data/`. 
-
-# Indoor Testing
-
-While indoors, make sure **not** to transmit any signals with the antenna. Only transmit into the spectrum analyzer or in a loopback configuration to the SDR. 
-
-**Before doing any testing in a loopback configuration, use the spectrum analyzer to confirm that the transmitted power is less than the maximum input power the SDR can handle.** 
-
-When connecting any SMA cable, make sure to hold the cable and connection point still while you connect it so that the cable **does not spin** as you tighten the nut, as this can cause damage to the pin. Tighten the nut using the SMA torque wrench (the wrench will bend when the proper tightness is reached). 
-
-## Spectrum Analyzer:
-To test the program with the spectrum analyzer, you will need the following equipment: 
-* b205mini SDR 
-* USB 3.0 Micro B cable (connecting SDR to Pi) 
-* Raspberry Pi 5 
-* Raspberry Pi 5 Power Supply (USB C) 
-* Ethernet cable (connecting Pi to Laptop) 
-* Ethernet to USB C adapter (if your laptop doesn't have ethernet) 
-* 30 dB inline attenuator 
-* 2 SMA male-male cables 
-* SMA female-female adapter (or replace one of the male-male cables with a male-female cable) 
-* SMA torque wrench 
-* SMA female to N-Type male adapter (probably plugged into the spectrum analyzer RF Input port already) 
-* Spectrum Analyzer (Rigol DSA832-TG) 
-* 50 Ohm Load (Found in the Calibration Kit F604MS) 
-
-**Process**
-1. Ensure the blue ESD mat is properly grounded, and there are no food or drinks nearby. 
-2. Carefully take the 50 Ohm Load out of the calibration kit box. Be very careful while handling this piece of equipment.  
-3. Connect 50 Ohm Load to the “RX2” port on the SDR, ensuring that the load does not spin while the nut is being tightened. Tighten it using the torque wrench. 
-4. Connect this cable to the SMA female-female adapter. 
-5. Connect the SMA female-female adapter to the “IN” port on the 30 dB attenuator. 
-6. Connect the other SMA cable to the “OUT” port on the 30 dB attenuator.  
-7. Connect this SMA cable to the SMA female to N-Type adapter. 
-8. Connect the SMA female to N-Type adapter to the “RF Input” port on the spectrum analyzer if it is not already connected. Take special care that the adapter does not spin while connecting it to this port. 
-9. Turn on the spectrum analyzer.
-10. Set the Spectrum Analyzer's frequency to the chirps' configured center frequency. 
-11. Set the span of the spectrum analyzer to a bandwidth that allows you to see your full chirp in detail. 
-12. Configure your spectrum analyzer to see the maximum value when sampled. 
-13. Follow the steps in the sections above to connect your laptop to the Pi and get all the code ready to run on the Pi. 
-14. Plug the USB 3.0 Micro B cable into one of the blue USB ports on the Pi and plug the other end into the SDR. 
-15. Follow the Running the Code section below on how to run the program. 
-16. When the code is running, you should see the transmissions appear on the spectrum analyzer. To see the peak transmitted power, press “Peak”. Ensure that this value is less than the SDR’s max input power before doing any loopback or outdoor testing. 
-17. Since the SDR is not receiving any samples, you will see receiver errors printed to `uhd_stdout.log`, and `rx_samps.bin` will be empty.
-
-## Loopback Configuration: 
-
-To get any actual data from the SDR, we must both transmit and receive signals by connecting the SDR to itself in a loopback configuration. 
-
-**Before running the program in this configuration, make sure that you have tested your current code and config settings with the spectrum analyzer method above, and that the peak power is less than the SDR’s max input power (-15 dBm)!** 
-
-**When connecting the b205mini to itself, you should always use a 30 dBm attenuator!**
-
-1. Follow the steps in the Spectrum Analyzer section above to set up the hardware and test it with the spectrum analyzer. Confirm that the program works and the peak power is less than -15dBm. 
-2. Stop all transmissions, and do not transmit again until everything has been reconnected. You can unplug the SDR from the Pi to ensure this cannot happen. 
-3. Disconnect the SMA cable from the adapter on the spectrum analyzer. 
-4. Carefully disconnect the 50 Ohm Load and place it back in the box. 
-5. Connect the SMA cable to the “RX2” port on the SDR. 
-6. Plug the SDR back into the Pi if you disconnected it previously. 
-7. Follow the Running the Code section below to run the program.
-
-# Running the Code: 
-Now that you’re connected to the Pi and have hardware set up, you can run the code with the following commands: 
-
-1. `cd uhd_radar/` 
-2. `conda activate uhd`
-3. Check your config settings are set correctly with `nano config/<your-file>.yaml` 
-4. With the b205mini make sure the following values in the RF0 (not RF1) section are set: tx_gain should not exceed ~80 dB (max possible is 89.8 dB), rx_gain should not exceed 76 dB, tx_ant should be set to “TX/RX”, rx_ant should be set to “RX2” and transmit should be set to true. 
-5. run `make hardware-test` 
-6. run `python run.py config/<your-file>.yaml` 
-7. If you have num_pulses set to -1, then you must stop the program with Ctrl+C. 
-8. To view the output data, transfer it to a laptop (see above), ensure the PLOT section has been copied to the config file (it can be found in any of our previous outdoor tests, or the synthetic-config.yaml) and update the parameters in that section. 
-9. Plot the output with `python postprocessing/plot_samples.py data/<timestamp>_config.yaml` 
-
-

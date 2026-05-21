@@ -1,6 +1,6 @@
 ---
 title: Compatible hardware
-linkTitle: Hardware
+linkTitle: 1 - Hardware
 description: Options for SDR hardware and host computers
 weight: 10
 ---

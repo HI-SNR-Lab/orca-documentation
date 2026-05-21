@@ -1,6 +1,6 @@
 ---
-title: Raspberry Pi Setup
-#description: 
+title: Hardware Setup
+description: How to set up the Raspberry Pi to generate a chirp, communicate with the SDR, and perform pre- and post-processing
 weight: 100
 ---
 
@@ -22,7 +22,7 @@ The cloud-init setup is controlled by two files: `user-data` and `network-config
 Examples of each are shown below, but you will likely need to modify these to suit
 your purpose. We have pages on how to customize
 [user-data]({{< ref "user-data-config" >}}) and
-[network-config]({{< ref "pi-internet" >}}).
+[network-config]({{< ref "network" >}}).
 
 #### user-data Example
 {{< readfile file="/static/cloud-init/user-data" code="true" lang="yaml" >}}
@@ -77,7 +77,7 @@ Eject the microSD and put it back in the Pi.
 
 {{% alert title="Your Pi needs an internet connection for this part" color="info" %}}
 Make sure you Pi will have access to the internet before you begin this part.
-See the [networking page]({{< ref "pi-internet" >}}) for information.
+See the [networking page]({{< ref "network" >}}) for information.
 {{% /alert %}}
 
 Power up the Pi and wait for cloud-init to run.

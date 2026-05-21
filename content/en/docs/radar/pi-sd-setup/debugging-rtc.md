@@ -1,5 +1,5 @@
 ---
-title: "Debugging: Real-Time Clocks (RTC)"
+title: "7 - Debugging: Real-Time Clocks (RTC)"
 description: RTC choices and possible solutions to RTC issues 
 weight: 100
 ---
