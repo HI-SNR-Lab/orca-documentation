@@ -50,7 +50,7 @@ multiple of `pulse_rep_int`.
 
 ORCA currently assumes that the SDR clock is useful to relative timing only and
 relies on the _host computer_ clock to provide a starting timestamp. When using
-the [run.py interface]({{< ref "/docs/radar/sdr-interface/code#runner-scripts" >}}),
+the [run.py interface]({{< ref "/docs/radar/pi-sd-setup/code#runner-scripts" >}}),
 `stdout` output is logged with a Unix timestamp from the host computer. The
 timestamp on the starting message (plus any specified `time_offset` in the config
 file) is used to provide the absolute time of the first transmission.

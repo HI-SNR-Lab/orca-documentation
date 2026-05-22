@@ -1,6 +1,6 @@
 ---
 title: 6 - Testing Layout
-description: How to conduct testing using ORCA to confirm that the current setup works as expected.
+description: ORCA tests that confirm current setup works as expected.
 weight: 10
 ---
 

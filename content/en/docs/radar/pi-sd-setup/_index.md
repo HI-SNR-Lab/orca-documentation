@@ -90,7 +90,6 @@ this to be ready.
 
 After the network setup is complete, you should be able to login over SSH.
 
-For instructions on SSH-ing into your Pi, see [here]({{< ref "connect-to-pi" >}}).
 In particular, please note that you need to have SSH agent forwarding working.
 Instructions for this are on that page.
 
