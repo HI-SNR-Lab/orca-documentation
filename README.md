@@ -43,6 +43,7 @@ on Linux.
    changes to the docsy example and those changes will immediately show up in your
    browser after you save.
 
+
 ### Cleanup
 
 To stop Docker Compose, on your terminal window, press **Ctrl + C**.
