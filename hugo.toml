@@ -1,4 +1,5 @@
-baseURL = "https://hisnr.com"
+baseURL = "https://hisnr.com/"
+canonifyURLs = true
 title = "Open Radar Code Architecture"
 
 # Language settings
