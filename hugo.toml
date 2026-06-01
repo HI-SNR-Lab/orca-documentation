@@ -1,6 +1,4 @@
-baseURL = "https://hisnr.com/orca/"
-relativeURLs = false
-canonifyURLs = true
+baseURL = "https://orca.hisnr.com/"
 title = "Open Radar Code Architecture"
 
 # Language settings
@@ -88,7 +86,7 @@ description = "Documentation for ORCA"
 section = ["HTML", "print", "RSS"]
 
 [params]
-copyright = "Anna Broome and Thomas Teisberg"
+copyright = "Nicole Bienert"
 #privacy_policy = "https://policies.google.com/privacy"
 
 # First one is picked as the Twitter card image if not set on page.
@@ -110,12 +108,12 @@ version = "0.0"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
-url_latest_version = "https://orca.radioglaciology.com/"
+url_latest_version = "https://github.com/HI-SNR-Lab/orca-documentation"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/radioglaciology/orca-documentation"
+github_repo = "https://github.com/HI-SNR-Lab/orca-documentation"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-github_project_repo = "https://github.com/radioglaciology/uhd_radar"
+github_project_repo = "https://github.com/HI-SNR-Lab/uhd_radar"
 
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""
@@ -187,7 +185,7 @@ enable = false
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
   name = "GitHub"
-  url = "https://github.com/radioglaciology/uhd_radar"
+  url = "https://github.com/HI-SNR-Lab/uhd_radar"
   icon = "fab fa-github"
   desc = "ORCA codebase GitHub"
 # [[params.links.developer]]
