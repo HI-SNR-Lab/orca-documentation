@@ -2,56 +2,48 @@
 name: Deploy Hugo site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches:
       - main
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
-# Default to bash
 defaults:
   run:
     shell: bash
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.147.2
       HUGO_ENVIRONMENT: production
-      TZ: America/Los_angeles
+      TZ: America/Los_Angeles
     steps:
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb          
+      
       - name: Install Dart Sass
         run: sudo snap install dart-sass
+      
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      
       - name: Cache Restore
         id: cache-restore
         uses: actions/cache/restore@v4
@@ -59,18 +51,22 @@ jobs:
           path: |
             ${{ runner.temp }}/hugo_cache
           key: hugo-${{ github.run_id }}
-          restore-keys:
+          restore-keys: |
             hugo-
+      
       - name: Configure Git
         run: git config core.quotepath false
+      
       - name: Install postcss-cli
         run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix
+  
       - name: Build with Hugo
         run: |
           hugo \
             --gc \
             --minify \
-            --cacheDir "${{ runner.temp }}/hugo_cache"
+            --cacheDir "${{ runner.temp }}/hugo_cache" \
+            --baseURL "https://hisnr.com"
       
       - name: Cache Save
         id: cache-save
@@ -80,9 +76,6 @@ jobs:
             ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
 
-      # REMOVE the Create CNAME step entirely. It is not used for subfolders.
-
-      # Deploys your built HTML files directly into the orca folder of your main site
       - name: Deploy to gh-pages branch
         id: deployment
         uses: peaceiris/actions-gh-pages@v3
