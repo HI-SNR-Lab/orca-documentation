@@ -34,12 +34,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      # This completely replaces the manual wget download step safely
       - name: Setup Hugo CLI
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.147.2'
-          extended: true # Automatically loads the extended Sass compiler version
+          extended: true 
 
       - name: Install Dart Sass
         run: sudo snap install dart-sass
@@ -68,8 +67,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --cacheDir "${{ runner.temp }}/hugo_cache" \
-            --baseURL "https://hisnr.com/orca/"
+            --cacheDir "${{ runner.temp }}/hugo_cache"
 
       - name: Cache Save
         id: cache-save
@@ -80,14 +78,18 @@ jobs:
             ${{ runner.temp }}/hugo_cache
           key: hugo-${{ github.sha }}
 
-      - name: Push to Main Website Repo
-        id: deployment
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          personal_token: ${{ secrets.HISNR_TOKEN }} 
-          external_repository: HI-SNR-Lab/HI-SNR.github.io
-          publish_branch: main        
-          publish_dir: ./public
-          destination_dir: orca       
-          keep_files: true            
-          enable_jekyll: false
+          path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
