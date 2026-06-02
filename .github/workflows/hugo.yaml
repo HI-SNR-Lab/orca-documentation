@@ -28,20 +28,22 @@ jobs:
       HUGO_ENVIRONMENT: production
       TZ: America/Los_Angeles
     steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com{HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb        
-      
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
-      
-      - name: Checkout
+      - name: Checkout Source Code
         uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
-          
+
+      # This completely replaces the manual wget download step safely
+      - name: Setup Hugo CLI
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.147.2'
+          extended: true # Automatically loads the extended Sass compiler version
+
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+        
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       
