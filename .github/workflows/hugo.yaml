@@ -87,3 +87,4 @@ jobs:
           destination_dir: orca
           keep_files: true
           enable_jekyll: false
+          cname: hisnr.com
