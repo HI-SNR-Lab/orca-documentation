@@ -1,4 +1,4 @@
-# Sample workflow for building and deploying a Hugo site to GitHub Pages
+# Workflow for building and deploying a Hugo site natively to GitHub Pages
 name: Deploy Hugo site to Pages
 
 on:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Install Hugo CLI
         run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com{HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb          
       
       - name: Install Dart Sass
@@ -41,6 +41,7 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+          
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       
@@ -50,7 +51,7 @@ jobs:
         with:
           path: |
             ${{ runner.temp }}/hugo_cache
-          key: hugo-${{ github.run_id }}
+          key: hugo-${{ github.sha }}
           restore-keys: |
             hugo-
       
@@ -66,24 +67,29 @@ jobs:
             --gc \
             --minify \
             --cacheDir "${{ runner.temp }}/hugo_cache" \
-            --baseURL "https://hisnr.com/orca"
-      
+            --baseURL "https://hisnr.com"
+
       - name: Cache Save
         id: cache-save
         uses: actions/cache/save@v4
+        if: steps.cache-restore.outputs.cache-hit != 'true'
         with:
           path: |
             ${{ runner.temp }}/hugo_cache
-          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
+          key: hugo-${{ github.sha }}
 
-      - name: Deploy to Main repository
-        id: deployment
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          personal_token: ${{ secrets.HISNR_TOKEN }}\
-          external_repository: HI-SNR-Lab/HI-SNR.github.io
-          publish_branch: main
-          publish_dir: ./public
-          destination_dir: orca
-          keep_files: true
-          enable_jekyll: false
+          path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
