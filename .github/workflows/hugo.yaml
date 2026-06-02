@@ -84,7 +84,6 @@ jobs:
           external_repository: hi-snr-lab/HI-SNR.github.io
           publish_branch: gh-pages
           publish_dir: ./public
-          destination_dir: orca
-          keep_files: true
+          destination_dir: orca 
+          keep_files: true 
           enable_jekyll: false
-          cname: hisnr.com
