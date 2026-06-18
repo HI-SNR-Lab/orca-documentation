@@ -33,7 +33,7 @@ citation for all uses of ORCA is:
 
 # Contributors
 
-## HiSNR Laboratory
+## [HI-SNR Laboratory](https://hisnr.com/) {{< fa "fa-solid fa-envelope" "mailto:hisnr-lab@colorado.edu"  >}}
 
 {{< cardpane >}}
 
@@ -54,7 +54,7 @@ citation for all uses of ORCA is:
 
 {{< /cardpane >}}
 
-##  Radio Glaciology Laboratory
+##  [Radio Glaciology Laboratory](https://www.radioglaciology.com)
 
 {{< cardpane >}}
 

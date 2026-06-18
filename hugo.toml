@@ -87,7 +87,7 @@ description = "Documentation for ORCA"
 section = ["HTML", "print", "RSS"]
 
 [params]
-copyright = "Nicole Bienert"
+copyright = "HI-SNR Laboratory"
 #privacy_policy = "https://policies.google.com/privacy"
 
 # First one is picked as the Twitter card image if not set on page.
