@@ -15,3 +15,8 @@ Whenever you try to connect to something, like GitHub with the SSH key, somethin
 To connect to your Raspberry Pi's terminal from your laptop, you first give it the public key. After it is connected to the wifi, it is able to copy it from GitHub. Further details are in the setting up your Raspberry Pi page. Then when you try to connect to the Raspberry Pi, the two keys are compared. After verification, you then can access the Pi's terminal. If verification fails, you can't access the terminal. 
 
 <!-- HAVE ROWAN TEST, after he makes a ssh key, can he connect to the Pi? or then after it gets the public key can it connect -->
+
+{{% pageinfo %}}
+Back to [ORCA setup](/docs/radar/setupguide/ORCAsetup) or continue to [Raspberry Pi setup](/docs/radar/setupguide/RaspPi).
+
+{{% /pageinfo %}}

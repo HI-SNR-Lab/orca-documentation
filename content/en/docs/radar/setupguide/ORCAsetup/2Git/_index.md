@@ -21,3 +21,8 @@ After adding files, create a new commit using `git commit -m "Commit message"`. 
 Git allows you to have multiple branches of the code. Each branch keeps different changes and commits, then the two branches can be merged back together. It is standard practice to make a new branch for each new feature that is being added, as it avoids problems introduced by having multiple partially implemented features conflicting with each other, as well as conflicts introduced by multiple developers working on the same file at the same time. A new branch can be created with `git checkout -b branchname`. Once the branch is created, you can switch between branches with `git checkout branchname` (the default branch is called "main"). If changes were made to the main branch after you created your branch and you want to include them in your branch, you can merge the main branch into yours. First make sure you are on your branch (`git branch` will tell you what branch you are on, to exit hit q), then run `git fetch origin` and `git merge origin/main`. You may run into merge conflicts which occur when each branch makes changes to the same lines of code. VS Code has a nice built-in GUI for resolving merge conflicts, which allows you to select which change to make.
 
 VS Code also a different UI to do all of the items mentioned above instead of using a terminal if you want to search it up.
+
+{{% pageinfo %}}
+Back to [ORCA setup](/docs/radar/setupguide/ORCAsetup) or continue to [Raspberry Pi setup](/docs/radar/setupguide/RaspPi).
+
+{{% /pageinfo %}}
