@@ -1,9 +1,10 @@
 ---
-title: Hardware 
+title: ORCA Setup 
 linktitle: 2 - ORCA Setup
 description: Aquiring dependencies and setting up the repository
 weight: 100
 ---
+<link rel="stylesheet" href="../style.css">
 
 The following instructions are for Windows devices. There may be different processes for different OS systems. If you find out how to set ORCA up for different devices, feel free to add to this documentation. 
 
@@ -29,7 +30,7 @@ The following instructions are for Windows devices. There may be different proce
 - Go to the [ORCA repository](https://github.com/radioglaciology/uhd_radar/tree/main) and click "Fork" to create your own copy of the code. Name this new repository whatever you want.
 
 {{% alert title="SSH Process Below" color="info" %}}
-If you've already made an SSH key and connected it to github, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Understanding SSH](/docs/radar/setupguide/ORCAsetup/SSH) if you want to learn more!
+If you've already made an SSH key aand connected it to github, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Understanding SSH](/docs/radar/setupguide/ORCAsetup/SSH) if you want to learn more!
 {{% /alert %}}
 
 - To securely connect your laptop to GitHub, we will create an SSH key. In the Git Bash terminal, run `ssh-keygen -t ed25519 -C [your@email.com](mailto:your@email.com)` and accept the default location.
@@ -70,3 +71,8 @@ To initially copy a repository from GitHub, use the **git clone &lt;repo-link&gt
 When you have made new changes you want to push to GitHub, you will need to make a commit. First, add all the files you changed using **git add -A** which adds all modified files. If you only want to add a few specific ones, you can do **git add file1.txt file2.txt**. After adding files, create a new commit using **git commit -m "Commit message"**. To make this commit available on GitHub, push the changes with **git push.** Git may ask you to explicitly define the upstream branch you are trying to push to, in this case follow the suggestions given such as **git push -u origin branchname**. You can make multiple commits locally before pushing it to GitHub, or you can push right away after making a commit.
 
 Git allows you to have multiple branches of the code. Each branch keeps different changes and commits, then the two branches can be merged back together. It is standard practice to make a new branch for each new feature that is being added, as it avoids problems introduced by having multiple partially implemented features conflicting with each other, as well as conflicts introduced by multiple developers working on the same file at the same time. A new branch can be created with **git checkout -b branchname**. Once the branch is created, you can switch between branches with **git checkout branchname** (the default branch is called "main"). If changes were made to the main branch after you created your branch and you want to include them in your branch, you can merge the main branch into yours. First make sure you are on your branch (**git branch** will tell you what branch you are on), then run **git fetch origin** and **git merge origin/main**. You may run into merge conflicts which occur when each branch makes changes to the same lines of code. VS Code has a nice built-in GUI for resolving merge conflicts, which allows you to select which change to make.
+
+{{% pageinfo %}}
+Next, [set up your Raspberry Pi](/docs/radar/setupguide/RaspPi).
+
+{{% /pageinfo %}}

@@ -19,4 +19,8 @@ The setup guide will include these steps:
 
 At the end of this process, your SDR and Raspberry Pi should be able to be used as a radar.
 <!-- yeah so if theres any better wording for this that'd be great -->
-To begin, first read about [hardware](/docs/radar/setupguide/hardware).
+{{% pageinfo %}}
+To begin, first read about your [hardware options](/docs/radar/setupguide/hardware).
+{{% /pageinfo %}}
+
+Beneath are links because the website puts them there, you can ignore them. They are there because they are in the level beneath the Setupguide.
