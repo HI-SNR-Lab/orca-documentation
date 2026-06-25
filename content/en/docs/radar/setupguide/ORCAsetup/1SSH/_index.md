@@ -2,7 +2,7 @@
 title: SSH
 linktitle: Basics of SSH
 description: If you already know how SSH works you don't need to read this. The goal is to gain a basic understanding of what SSH is. 
-weight: 100
+weight: 10
 ---
 <!-- HAVE SOMEONE FACT CHECK THIS BECAUSE OTHERWISE ITS THE BLIND LEADING THE BLIND :fear: -->
 

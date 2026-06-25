@@ -29,8 +29,8 @@ The following instructions are for Windows devices. There may be different proce
 - Create an account on [GitHub](https://github.com/) and sign in
 - Go to the [ORCA repository](https://github.com/radioglaciology/uhd_radar/tree/main) and click "Fork" to create your own copy of the code. Name this new repository whatever you want.
 
-{{% alert title="SSH Process Below" color="info" %}}
-If you've already made an SSH key aand connected it to github, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Understanding SSH](/docs/radar/setupguide/ORCAsetup/SSH) if you want to learn more!
+{{% alert title="" color="info" %}}
+If you've already made an SSH key aand connected it to github, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Basics of SSH](/docs/radar/setupguide/ORCAsetup/1SSH).
 {{% /alert %}}
 
 - To securely connect your laptop to GitHub, we will create an SSH key. In the Git Bash terminal, run `ssh-keygen -t ed25519 -C [your@email.com](mailto:your@email.com)` and accept the default location.
@@ -53,6 +53,10 @@ If that command doesn't work, you can also try and run `cat ~/.ssh/id_ed25519.pu
 - Copy the repository link which should end in .git
 - In the Git Bash terminal, navigate to whichever folder you would like the code to be copied into, and run `git clone link_to_repo.git`.
 - In VSCode, you can now open this folder to see all the code
+
+{{% alert title="" color="info" %}}
+If you haven't worked with Git before, read the [Basics of Git](/docs/radar/setupguide/ORCAsetup/2Git) 
+{{% /alert %}}
 
 ## Setting up Conda
 
