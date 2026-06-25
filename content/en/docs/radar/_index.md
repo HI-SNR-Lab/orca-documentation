@@ -25,9 +25,10 @@ This guide is divided into three parts to help set up and understand ORCA. ORCA 
 
 <!-- ![Computer to SDR Very Basic Implementation](/docs/radar/pi-sd-setup/photos/computer-sdr.png) -->
 
+[Setup Guide for Beginners (do i remove beginners)](/docs/radar/setupguide) is a guide to set up your own ORCA and SDR system from scratch. Most likely you will want to start here. 
 
-[Hardware Setup](/docs/radar/pi-sd-setup) details how to connect to the computer and software defined radio, which is currently a Raspberry Pi.
+<!-- [Hardware Setup](/docs/radar/pi-sd-setup) details how to connect to the computer and software defined radio, which is currently a Raspberry Pi.
 
 [Radar Code](/docs/radar/sdr-interface/) covers everything about the code that runs while the radar is actively collecting data. 
 
-[Postprocessing](/docs/radar/postprocessing/) section explains how data is saved and explains the basic processing scripts that we provide.
+[Postprocessing](/docs/radar/postprocessing/) section explains how data is saved and explains the basic processing scripts that we provide. -->
