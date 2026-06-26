@@ -46,6 +46,14 @@ If that command doesn't work, you can also try and run `cat ~/.ssh/id_ed25519.pu
 - Now we need to install [Git](https://git-scm.com/downloads/win) for Windows. Follow the installer prompts
 - Once installed open a Git Bash terminal in VSCode. This is where you will run all the Git commands.
 
+{{% alert title="" color="info" %}}
+If you need more help with making an SSH key, here is a helpful [GitHub link](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+{{% /alert %}}
+
+## SSH Agent Forwarding
+After making your SSH key, you need to add it to your SSH agent on your lapotp. First we need the SSH agent to be running. In powershell run `Get-Service -Name ssh-agent`. If it says the status is stopped, run `Start-Service ssh-agent`. Then run `Get-Service -Name ssh-agent` again and check it says the status is running.
+
+Now to add your key, run `ssh-add C:/Users/YOU/.ssh/id_ed25519`. You will need to insert the secure passphrase you made when you originally made your SSH key. The key should now be added. 
 ## Cloning the Repository
 
 - We will now clone the code from GitHub onto your computer so that it can be accessed locally. Go to your fork that you just created.
