@@ -19,7 +19,7 @@ sudo apt install rpi-imager
 For other operating systems, download the tool from [here](https://www.raspberrypi.com/software/).
 
 {{% alert title="" color="info" %}}
-Remember to choose your microSD card carefully as mentioned in [hardware options](/docs/radar/setupguide/hardware)
+Remember to choose your microSD card carefully as mentioned in [hardware options](/docs/radar/setupguide/1hardware)
 {{% /alert %}}
 
 1. Launcher the imager
@@ -51,7 +51,7 @@ The cloud-init setup is controlled by two files: `user-data` and `network-config
 
 Examples of each are shown below, but you will likely need to modify these to suit
 your purpose. We have pages on how to customize
-[network-config](/docs/radar/setupguide/RaspPi/1networkconfig) and [user-data](/docs/radar/setupguide/RaspPi/2userdataconfig).
+[network-config](/docs/radar/setupguide/3RaspPi/1networkconfig) and [user-data](/docs/radar/setupguide/3RaspPi/2userdataconfig).
 
 #### user-data Example
 {{< readfile file="/static/cloud-init/user-data" code="true" lang="yaml" >}}
@@ -108,7 +108,7 @@ this to be ready.
 After the network setup is complete, you should be able to login over SSH.
 
 In particular, please note that you need to have SSH agent forwarding working on your laptop.
-You should have already done this under [ORCA Setup](/docs/radar/setupguide/ORCAsetup) when you first made your SSH key.
+You should have already done this under [ORCA Setup](/docs/radar/setupguide/2ORCAsetup) when you first made your SSH key.
 
 When you first login, cloud-init may not have finished running. To check the status, run:
 
@@ -268,3 +268,8 @@ Example:
 **If you push or pull a file that has the same name in the other device, the new file pushed/pulled will overwrite the old file.**
 
 When using these commands, you are typing them on your laptop powershell. You are either pushing from your laptop to the Pi, or you are using your laptop to pull from the Pi. You can also push from the Pi but that's a different command. 
+
+{{% pageinfo %}}
+Next, [connect your SDR](/docs/radar/setupguide/4connectingSDR).
+
+{{% /pageinfo %}}

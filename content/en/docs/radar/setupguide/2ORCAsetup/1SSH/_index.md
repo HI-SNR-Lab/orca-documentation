@@ -17,6 +17,6 @@ To connect to your Raspberry Pi's terminal from your laptop, you first give it t
 <!-- HAVE ROWAN TEST, after he makes a ssh key, can he connect to the Pi? or then after it gets the public key can it connect -->
 
 {{% pageinfo %}}
-Back to [ORCA setup](/docs/radar/setupguide/ORCAsetup) or continue to [Raspberry Pi setup](/docs/radar/setupguide/RaspPi).
+Back to [ORCA setup](/docs/radar/setupguide/2ORCAsetup) or continue to [Raspberry Pi setup](/docs/radar/setupguide/3RaspPi).
 
 {{% /pageinfo %}}

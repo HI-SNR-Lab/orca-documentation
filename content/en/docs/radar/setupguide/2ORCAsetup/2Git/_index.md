@@ -23,6 +23,6 @@ Git allows you to have multiple branches of the code. Each branch keeps differen
 VS Code also a different UI to do all of the items mentioned above instead of using a terminal if you want to search it up.
 
 {{% pageinfo %}}
-Back to [ORCA setup](/docs/radar/setupguide/ORCAsetup) or continue to [Raspberry Pi setup](/docs/radar/setupguide/RaspPi).
+Back to [ORCA setup](/docs/radar/setupguide/2ORCAsetup) or continue to [Raspberry Pi setup](/docs/radar/setupguide/3RaspPi).
 
 {{% /pageinfo %}}

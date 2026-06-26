@@ -30,7 +30,7 @@ The following instructions are for Windows devices. There may be different proce
 - Go to the [ORCA repository](https://github.com/radioglaciology/uhd_radar/tree/main) and click "Fork" to create your own copy of the code. Name this new repository whatever you want.
 
 {{% alert title="" color="info" %}}
-If you've already made an SSH key aand connected it to github, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Basics of SSH](/docs/radar/setupguide/ORCAsetup/1SSH).
+If you've already made an SSH key aand connected it to github, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Basics of SSH](/docs/radar/setupguide/2ORCAsetup/1SSH).
 {{% /alert %}}
 
 - To securely connect your laptop to GitHub, we will create an SSH key. In the Git Bash terminal, run `ssh-keygen -t ed25519 -C [your@email.com](mailto:your@email.com)` and accept the default location.
@@ -63,7 +63,7 @@ Now to add your key, run `ssh-add C:/Users/YOU/.ssh/id_ed25519`. You will need t
 - In VSCode, you can now open this folder to see all the code
 
 {{% alert title="" color="info" %}}
-If you haven't worked with Git before, read the [Basics of Git](/docs/radar/setupguide/ORCAsetup/2Git) 
+If you haven't worked with Git before, read the [Basics of Git](/docs/radar/setupguide/2ORCAsetup/2Git) 
 {{% /alert %}}
 
 ## Setting up Conda
@@ -75,6 +75,6 @@ If you haven't worked with Git before, read the [Basics of Git](/docs/radar/setu
 - The code is now installed and ready to run or modified.
 
 {{% pageinfo %}}
-Next, [set up your Raspberry Pi](/docs/radar/setupguide/RaspPi).
+Next, [set up your Raspberry Pi](/docs/radar/setupguide/3RaspPi).
 
 {{% /pageinfo %}}

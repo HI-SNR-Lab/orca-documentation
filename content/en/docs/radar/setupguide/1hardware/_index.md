@@ -75,6 +75,6 @@ We use Samsung Pro Plus series MicroSD cards. There are other storage options to
 See [Other Storage Options](/docs/peregrine/payload/data-storage) for details. 
 
 {{% pageinfo %}}
-Next, [set up ORCA](/docs/radar/setupguide/ORCAsetup) on your device.
+Next, [set up ORCA](/docs/radar/setupguide/2ORCAsetup) on your device.
 
 {{% /pageinfo %}}
