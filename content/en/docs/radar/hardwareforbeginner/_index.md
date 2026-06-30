@@ -1,8 +1,8 @@
 ---
 title: Hardware 
-linktitle: 1 - Hardware Options
+linktitle: Hardware Options
 description: Options for SDR hardware and host computers
-weight: 100
+weight: 10
 ---
 
 ## Selecting a Software-Defined Radio (SDR)

@@ -1,6 +1,6 @@
 ---
 title:  Useful Ubuntu Commands
-linktitle: Useful Ubuntu Commands
+linktitle: 0 - Useful Ubuntu Commands
 description: Cheatsheet for Ubuntu commands
 weight: 100
 ---
@@ -14,3 +14,5 @@ ls
 cd ..
 
 nano
+
+conda

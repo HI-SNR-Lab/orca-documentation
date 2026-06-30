@@ -1,72 +1,11 @@
 ---
-title: Raspberry Pi Setup 
-linktitle: 3 - Raspberry Pi Setup
-description: Imaging your Pi and getting it connected to your laptop
+title: Connect and Control Options
+linkTitle: 3 - Connecting to Pi
+description: Options for connecting to the Raspberry Pi in order to transmit desired data or set parameters.
 weight: 100
 ---
+
 <link rel="stylesheet" href="../style.css">
-
-In order to standardize between units, much of the Pi setup is automated or semi-automated. This guide will walk you through the steps of setting up your Pi the way we do. Along the way, there are also links for more information on how to customize this setup. This is an area where you will almost certainly need to customize some aspects of the setup.
-
-## Imaging your Pi
-To start, download the Raspberry Pi Imager tool (or use your preferred software
-for imaging SD cards). Imaging is basically giving the Raspberry Pi an operating system. On Ubuntu, you can install it like this:
-
-```
-sudo apt install rpi-imager
-```
-
-For other operating systems, download the tool from [here](https://www.raspberrypi.com/software/).
-
-{{% alert title="" color="info" %}}
-Remember to choose your microSD card carefully as mentioned in [hardware options](/docs/radar/setupguide/1hardware)
-{{% /alert %}}
-
-1. Launcher the imager
-2. Select what version of Raspberry Pi you are using
-3. Under "OS" select "Other general-purpose OS"
-4. Select Ubuntu
-5. Scroll until you find `Ubuntu Server 24.04.xx LTS (64-bit)`. Make sure you get 64-bit, 32-bit will not work. Also make sure that the Raspberry Pi you are using is supported. 
-
-{{% imgproc OS-version-image Fit "800x400" %}}
-You want Ubuntu Server 24.04 LTS 64-bit and make sure your Pi is supported as shown in the highlight
-{{% /imgproc %}}
-6. Insert your SD card if you haven't already done so, and select it
-7. Skip customization, we will create our own user-data file to insert
-8. Image the SD card
-
-After imaging is complete, you should see a `system-boot` drive and maybe a `writable` drive. `system-boot` is more important. 
-
-{{% alert title="Can't find system-boot?" color="info" %}}
-If you see a different drive from the SD card that tells you to format it in order to read it, do not format it. The following information is likely Windows specific. If you can't see the `system-boot` drive, it is likely because it wasn't assigned a letter. You need admin privliages to fix this. Hit `WIN + X` and select "Disk Manager". You will see the `system-boot` drive there, it just doesn't have a letter. Right click on it and assign a letter. Click "add" on the pop up and assign it a letter. The drive should now be visible in your file explorer.
-{{% /alert %}}
-
-## Cloud-init
-Setup of the Raspberry Pi is semi-automated using [cloud-init](https://cloudinit.readthedocs.io/en/latest/).
-
-### Cloud-init customization
-
-The cloud-init setup is controlled by two files: `user-data` and `network-config`.
-(You'll use these files a couple of steps down.)
-
-Examples of each are shown below, but you will likely need to modify these to suit
-your purpose. We have pages on how to customize
-[network-config](/docs/radar/setupguide/3RaspPi/1networkconfig) and [user-data](/docs/radar/setupguide/3RaspPi/2userdataconfig).
-
-#### user-data Example
-{{< readfile file="/static/cloud-init/user-data" code="true" lang="yaml" >}}
-
-### network-config Example
-{{< readfile file="/static/cloud-init/network-config" code="true" lang="yaml" >}}
-
-### network-config Example for Laptop Mobile Hotspot and Possibly Normal Wifi
-{{< readfile file="/static/cloud-init/network-config-mobile-hotspot-example" code="true" lang="yaml" >}}
-
-{{% alert title="" color="info" %}}
-If your wifi SSID or password has slashes, it might freak the Raspberry Pi out and the network-config won't run properly. 
-{{% /alert %}}
-
-After you edit the user-data and network-config files and add them to your SD card. You can now power on the Raspberry Pi.
 
 ## Connecting to the Pi
 
@@ -108,7 +47,7 @@ this to be ready.
 After the network setup is complete, you should be able to login over SSH.
 
 In particular, please note that you need to have SSH agent forwarding working on your laptop.
-You should have already done this under [ORCA Setup](/docs/radar/setupguide/2ORCAsetup) when you first made your SSH key.
+You should have already done this under [ORCA Setup](/docs/radar/setupguide/2ORCAsetup) when you first made your SSH key. You can test that everything is working by running `ssh -T git@github.com`.
 
 When you first login, cloud-init may not have finished running. To check the status, run:
 
@@ -145,12 +84,12 @@ Here is how to edit your network-config files without having to take the SD card
 - You may need to run `sudo reboot`
 {{% /alert %}}
 
-You can log in and run commands directly with the keyboard (no mouse inputs). There is no way to scroll up through this terminal however, so if you want to be able to read a long output from a command you must pipe it into a file (ex. python run.py >> terminal_output.txt), then read the text file using nano. 
+You can log in and run commands directly with the keyboard (no mouse inputs). There is no way to scroll up through this terminal however, so if you want to be able to read a long output from a command you must pipe it into a file (ex. `python run.py >> terminal_output.txt`), then read the text file using nano. 
 
 ### Importing Your SSH Key
 You then need to add this SSH to the Pi. The simplest method is to first add the key to your GitHub account, then import it onto the Pi from there. If you don’t want to set up GitHub, you can add the key directly with a little extra work.
 
-**GitHub:** 
+**With GitHub:** 
 1. You should have already added the SSH key to your GitHub account. 
 2. Run `ssh-import-id gh:<your-github-username>` on the Raspberry Pi with the direct control
 
@@ -162,7 +101,7 @@ If you haven't yet, do the following:
 4. Log into the Pi using the direct control method above. 
 5. Run `ssh-import-id gh:<your-github-username>`. 
 
-Without GitHub: 
+**Without GitHub:**
 
 1. Log into the Pi using the direct control method above. 
 2. Open the authorized keys file with `sudo nano ~/.ssh/authorized_keys`. 
@@ -170,6 +109,44 @@ Without GitHub:
 4. Hit Ctrl+X followed by Y, then Enter to save the changes. 
 
 You should now have permission to SSH into the Pi from your laptop using one of the following methods (wifi or ethernet). 
+
+Modify your `~/.ssh/config` file (use `nano ~/.ssh/config`) and add an entry like this enabling SSH agent forwarding (or don't, you likely already set up SSH agent forwarding on your laptop so I don't think you need to do this):
+
+```
+Host 192.168.11.137
+    HostName 192.168.11.137
+    User ubuntu
+    ForwardAgent yes
+```
+
+Note that if your username or host IP address is different, you should adjust it accordingly.
+
+{{% alert title="Remote host identification has changed" color="info" %}}
+If you use the same static IP for multiple Pi's (which, presumably, you only
+ever use one of at a time), you may encounter an error stating:
+
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+```
+
+This is because your computer thinks its connecting to a different Raspberry Pi.
+
+You can manually add the fingerprint for the currently connected Pi like this:
+
+```
+ssh-keyscan -H 192.168.11.137 >> ~/.ssh/known_hosts
+```
+
+(This would be a bad idea to do at random for a remote computer. I'm assuming
+here that you've just plugged in a new Pi right in front of you and you
+know exactly why you're getting this error. You should only have to do this once
+per new Pi.)
+{{% /alert %}}
 
 {{% alert title="" color="info" %}}
 You might be able to just run `ssh ubuntu@<pi-ip-address>` on your Pi to SSH connect. The direct connect and internet connection should already exist since you needed them previously to import your GitHub key. You can get your Pi's IP address by running `hostname -I` or `ip a` (in my opinion, using `hostname -I` is easier cause you don't need to hunt for the ip info).
@@ -269,7 +246,10 @@ Example:
 
 When using these commands, you are typing them on your laptop powershell. You are either pushing from your laptop to the Pi, or you are using your laptop to pull from the Pi. You can also push from the Pi but that's a different command. 
 
-{{% pageinfo %}}
-Next, [connect your SDR](/docs/radar/setupguide/4connectingSDR).
-
-{{% /pageinfo %}}
+## Installing Miniconda
+1. First go to Anaconda's [website](https://www.anaconda.com/download) and scroll to the bottom to download Miniconda. You will want the Linux 64-Bit ARM64 version.
+2. Once the file is downloaded, you will want to use SCP to get the file onto the Pi. Make sure you have connected to the Pi using SSH. The command might look something like `scp .\Downloads\Miniconda3-latest-Linux-aarch64.sh ubuntu@192.168.137.131:~/`. 
+3. Within the Raspberry Pi's terminal, run `bash location-to-file/Miniconda3-latest-Linux-aarch64.sh` and accept the default options in the installer (select yes when prompted about auto_activate_base, though we will change this later)
+4. After Miniconda is installed, reboot the Raspberry Pi with `sudo reboot now`
+5. To ensure it has been installed, run “conda list” and you should see a list of the installed dependencies printed out. 
+6. We are now going to change one of the default settings with the command `conda config --set auto_activate_base false`

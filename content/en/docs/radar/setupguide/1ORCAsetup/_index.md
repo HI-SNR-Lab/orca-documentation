@@ -1,6 +1,6 @@
 ---
 title: ORCA Setup 
-linktitle: 2 - ORCA Setup
+linktitle: 1 - ORCA Setup
 description: Aquiring dependencies and setting up the repository
 weight: 100
 ---
@@ -8,7 +8,10 @@ weight: 100
 
 The following instructions are for Windows devices. There may be different processes for different OS systems. If you find out how to set ORCA up for different devices, feel free to add to this documentation. 
 
+
+
 ## Installing dependencies
+**If you are using a Raspberry Pi, you will want to get miniconda for the Raspberry Pi. This will be done later after SSH is set up. You can skip this section and go to Connecting to GitHub**
 
 - Install WSL (Windows Subsystem for Linux)
 
@@ -53,7 +56,7 @@ If you need more help with making an SSH key, here is a helpful [GitHub link](ht
 ## SSH Agent Forwarding
 After making your SSH key, you need to add it to your SSH agent on your lapotp. First we need the SSH agent to be running. In powershell run `Get-Service -Name ssh-agent`. If it says the status is stopped, run `Start-Service ssh-agent`. Then run `Get-Service -Name ssh-agent` again and check it says the status is running.
 
-Now to add your key, run `ssh-add C:/Users/YOU/.ssh/id_ed25519`. You will need to insert the secure passphrase you made when you originally made your SSH key. The key should now be added. 
+Now to add your key, run `ssh-add C:/Users/YOU/.ssh/id_ed25519`. You will need to insert the secure passphrase you made when you originally made your SSH key. The key should now be added. You can test this by running `ssh -T git@github.com`.
 ## Cloning the Repository
 
 - We will now clone the code from GitHub onto your computer so that it can be accessed locally. Go to your fork that you just created.
