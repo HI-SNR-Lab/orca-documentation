@@ -16,7 +16,7 @@ our publication:
 
 Code for ORCA can be found on the [Github Page](https://github.com/HI-SNR-Lab/uhd_radar), which contains additional details about downloading and testing ORCA on the radios that are currently available.
 
-This guide is divided into three parts to help set up and understand ORCA. ORCA uses a computer and a software-defined radio (SDR) to create a functioning radar. As the architecture is currently configured, the computer is a Raspberry Pi, and the SDR is an Ettus radio. Current work is being done to implement ORCA on a Xilinx board, which would act as both a computer and SDR.
+This guide is divided into three parts to help set up and understand ORCA. ORCA uses a computer and a software-defined radio (SDR) to create a functioning radar. As the architecture is currently configured, the computer is a Raspberry Pi, and the SDR is an Ettus radio. Current work is being done to implement ORCA on a Xilinx board, which would act as both a computer and SDR. Below is a simplistic block diagram that details the interaction between the hardware pieces that ORCA is intended to be used for. 
 
 
 <div style="text-align: center; margin: 40px 0;">
@@ -25,7 +25,7 @@ This guide is divided into three parts to help set up and understand ORCA. ORCA 
 
 <!-- ![Computer to SDR Very Basic Implementation](/docs/radar/pi-sd-setup/photos/computer-sdr.png) -->
 {{% pageinfo %}}
-[Setup Guide for Beginners (do i remove beginners)](/docs/radar/setupguide) is a guide to set up your own ORCA and SDR system from scratch. Most likely you will want to start here. 
+[Setup Guide for Beginners](/docs/radar/setupguide) contains more introductory information concerning essential hardware and software ideas and information.
 {{% /pageinfo %}}
 
 <!-- [Hardware Setup](/docs/radar/pi-sd-setup) details how to connect to the computer and software defined radio, which is currently a Raspberry Pi.

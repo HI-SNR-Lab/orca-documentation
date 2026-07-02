@@ -16,7 +16,7 @@ The basic capabilities of the two models we regularly use are detailed below:
 
 | SDR              | Frequency Range (GHz) | Bandwidth (MHz) | Channels   | Mass (kg) | Approximate Cost (USD) |
 |------------------|-----------------------|-----------------|------------|-----------|------------------------|
-| [X310](https://www.ettus.com/all-products/x310-kit/) with [UBX160](https://www.ettus.com/all-products/ubx160/) | 0.01-6                | 200             | 2 TX, 2 RX | 1.7       | $14,0000               |
+| [X310](https://www.ettus.com/all-products/x310-kit/) with [UBX160](https://www.ettus.com/all-products/ubx160/) | 0.01-6                | 200             | 2 TX, 2 RX | 1.7       | $14,000               |
 | [B205mini-i](https://www.ettus.com/all-products/usrp-b205mini-i/) | 0.07-6                | 56              | 1 TX, 1 RX | 0.024     | $1,600                 |
 
 In general, we recommend B series devices for applications with constraints on
