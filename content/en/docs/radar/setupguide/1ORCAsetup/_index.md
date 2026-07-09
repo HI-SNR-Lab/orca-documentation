@@ -30,7 +30,7 @@ The following instructions are for Windows devices. There may be different proce
 ## Connecting to GitHub
 
 - Create an account on [GitHub](https://github.com/) and sign in
-- Go to the [ORCA repository](https://github.com/radioglaciology/uhd_radar/tree/main) and click "Fork" to create your own copy of the code. Name this new repository whatever you want.
+- Go to the [ORCA repository](https://github.com/radioglaciology/uhd_radar/tree/main) and click "Branch" to create your own copy of the code. Name this new repository whatever you want.
 
 {{% alert title="" color="info" %}}
 If you've already made an SSH key aand connected it to github, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Basics of SSH](/docs/radar/setupguide/2ORCAsetup/1SSH).
