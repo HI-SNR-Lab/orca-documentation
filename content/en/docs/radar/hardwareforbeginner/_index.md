@@ -1,6 +1,6 @@
 ---
-title: Compatible hardware
-linkTitle: 1 - Hardware
+title: Hardware 
+linktitle: Hardware Options
 description: Options for SDR hardware and host computers
 weight: 10
 ---
@@ -16,7 +16,7 @@ The basic capabilities of the two models we regularly use are detailed below:
 
 | SDR              | Frequency Range (GHz) | Bandwidth (MHz) | Channels   | Mass (kg) | Approximate Cost (USD) |
 |------------------|-----------------------|-----------------|------------|-----------|------------------------|
-| [X310](https://www.ettus.com/all-products/x310-kit/) with [UBX160](https://www.ettus.com/all-products/ubx160/) | 0.01-6                | 200             | 2 TX, 2 RX | 1.7       | $14,000               |
+| [X310](https://www.ettus.com/all-products/x310-kit/) with [UBX160](https://www.ettus.com/all-products/ubx160/) | 0.01-6                | 200             | 2 TX, 2 RX | 1.7       | $14,0000               |
 | [B205mini-i](https://www.ettus.com/all-products/usrp-b205mini-i/) | 0.07-6                | 56              | 1 TX, 1 RX | 0.024     | $1,600                 |
 
 In general, we recommend B series devices for applications with constraints on
@@ -63,3 +63,18 @@ speed of your storage medium.
 Example results from running `error_code_late_command_sweep.py` on several
 combinations of host computers and SDRs.
 {{% /imgproc %}}
+
+## MicroSD Card
+Not all (micro) SD cards are the same. Speed and reliability can both vary a lot.
+
+Especially if you plan to store your data to your MicroSD card, you don't want to
+mess around with this. Don't use an SD card that's off-brand, questionably sourced
+(i.e. possibly counterfeit), or used.
+
+We use Samsung Pro Plus series MicroSD cards. There are other storage options too.
+See [Other Storage Options](/docs/peregrine/payload/data-storage) for details. 
+
+{{% pageinfo %}}
+Next, [set up ORCA](/docs/radar/setupguide/2ORCAsetup) on your device.
+
+{{% /pageinfo %}}

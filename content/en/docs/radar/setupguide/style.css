@@ -1,0 +1,13 @@
+.alert-info {
+    background-color: #f2f9f8; 
+    color: black;
+    border-left: 5px solid #6caba7 !important;
+}
+
+/* Targets any heading inside an info alert */
+.alert-info h4, 
+.alert-info h5, 
+.alert-info .alert-title {
+    color: #6caba7 !important; /* Replace with your desired color hex */
+    font-weight: normal;
+}
