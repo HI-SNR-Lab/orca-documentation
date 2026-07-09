@@ -11,7 +11,7 @@ The following instructions are for Windows devices. There may be different proce
 
 
 ## Installing dependencies
-**If you are using a Raspberry Pi, you will want to get miniconda for the Raspberry Pi. This will be done later after SSH is set up. You can skip this section and go to Connecting to GitHub**
+**If you are using a Raspberry Pi, you will also want to get miniconda for the Raspberry Pi. This will be done later after SSH is set up. You still want to do this section so you can run the code on your laptop when making plots.**
 
 - Install WSL (Windows Subsystem for Linux)
 
