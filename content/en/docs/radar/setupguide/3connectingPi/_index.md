@@ -253,3 +253,8 @@ When using these commands, you are typing them on your laptop powershell. You ar
 4. After Miniconda is installed, reboot the Raspberry Pi with `sudo reboot now`
 5. To ensure it has been installed, run “conda list” and you should see a list of the installed dependencies printed out. 
 6. We are now going to change one of the default settings with the command `conda config --set auto_activate_base false`
+
+{{% pageinfo %}}
+Next, read on how to [connect the SDR and run some tests](/docs/radar/setupguide/5connectSDR).
+
+{{% /pageinfo %}}
