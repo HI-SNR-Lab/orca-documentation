@@ -25,7 +25,8 @@ The following instructions are for Windows devices. There may be different proce
 - In the WSL terminal, run `bash \_path-to-Downloads/\_Miniconda3-latest-Linux-x86_64.sh` and accept the default options in the installer (select yes when prompted about auto_activate_base, though we will change this later).
 - After Miniconda has been installed, close and reopen the WSL terminal.
 - To ensure it has been installed, run `conda list` and you should see a list of the installed dependencies printed out.
-- We are now going to change one of the default settings with the command 1conda config --set auto_activate_base false`
+- We are now going to change one of the default settings with the command `conda config --set auto_activate_base false`
+- You also need to run `conda env create -n myenvironmentname -f environment.yaml` and `uhd_images_downloader` so you can plot your data later. `-n myenvironmentname` is optional, if you exclude this the default name will be `uhd`.
 
 ## Connecting to GitHub
 
@@ -33,7 +34,7 @@ The following instructions are for Windows devices. There may be different proce
 - Go to the [ORCA repository](https://github.com/radioglaciology/uhd_radar/tree/main) and click "Branch" to create your own copy of the code. Name this new repository whatever you want.
 
 {{% alert title="" color="info" %}}
-If you've already made an SSH key aand connected it to github, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Basics of SSH](/docs/radar/setupguide/2ORCAsetup/1SSH).
+If you've already made an SSH key and connected it to GitHub, you can skip the next few steps. If you have no clue what SSH and want to learn more, you can read [Basics of SSH](/docs/radar/setupguide/2ORCAsetup/1SSH).
 {{% /alert %}}
 
 - To securely connect your laptop to GitHub, we will create an SSH key. In the Git Bash terminal, run `ssh-keygen -t ed25519 -C [your@email.com](mailto:your@email.com)` and accept the default location.
