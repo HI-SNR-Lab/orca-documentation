@@ -3,7 +3,7 @@ title: MAPPERR Multi-frequency Radar
 linkTitle: MAPPERR
 #description: Details about the MAPPERR system
 menu: {main: {weight: 20, pre: "<i class='fa-solid fa-map'></i>"}}
-weight: 20
+weight: 10
 ---
 
 {{% pageinfo %}}

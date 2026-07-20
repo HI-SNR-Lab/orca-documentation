@@ -1,6 +1,5 @@
 ---
-title: Runtime overview
-linkTitle: 4 - Runtime Overview
+title: Runtime Overview
 description: Overview of the code's architecture
 weight: 100
 ---
