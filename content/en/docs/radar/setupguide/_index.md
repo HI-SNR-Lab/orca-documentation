@@ -4,6 +4,7 @@ description: Overview on how to set up ORCA and SDR. If you are new to ORCA or S
 weight: 30
 ---
 
+
 The setup guide will include these steps:
 
 1. Understanding which hardware to use
@@ -20,7 +21,7 @@ The setup guide will include these steps:
 At the end of this process, your SDR and Raspberry Pi should be able to be used as a radar.
 <!-- yeah so if theres any better wording for this that'd be great -->
 {{% pageinfo %}}
-To begin, first read about your [hardware options](/docs/radar/setupguide/1hardware).
+To begin, first read about setting up [ORCA](/docs/radar/setupguide/1ORCAsetup).
 {{% /pageinfo %}}
 
 Beneath are links because the website puts them there, you can ignore them. They are there because they are in the level beneath the Setupguide.
