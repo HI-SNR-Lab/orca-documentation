@@ -113,7 +113,7 @@ This is how to edit the `zero_sample_idx`. You need to first run the code so you
 1. To view the output data, transfer the desired data files to a laptop (typically the config.yaml and _rx_samps.bin file), ensure the `PLOT` section has been copied to the config file (it can be found in `synthetic-config.yaml`) and update the parameters in that section to match the names of the trial you wish to view. 
 2. The zero sample index is easiest to see if you have the `rectangular` chirp window.
 1. After running the loopback test with short SMA cables, scp the `_config.yaml` and `_rx_samps.bin` files from your Raspberry Pi onto your laptop. You want to save these in your branch/clone of the uhd_radar code under the data folder.
-2. Open the WSL terminal (you can do this in VSCode, hit CTRL + \`, and use the dropdown arrow to change the terminal type to WSL) 
+2. Open the WSL terminal (you can do this in VSCode, hit CTRL + `, and use the dropdown arrow to change the terminal type to WSL) 
 3. Activate the conda environment with `conda activate environment-name`. You should already be in your uhd_radar folder but if not, `cd` into it
 4. Run `python processing/test_scripts/test_loopback.py data/timestamp_config.yaml` where timestamp is edited to whatever config file you have saved in data. 
 5. The first graph that appears is the chirp, you want to close this to allow the next graph to appear. The next graph will be matched filter, also close this.
@@ -153,6 +153,10 @@ Now that all the variables are edited, you can run `test_loopback.py` and have a
 rx_samps.bin is a binary file (.bin stands for binary), so if you try to open and read it in your powershell, it'll probably crash! But it does look cool to see a bunch of random symbols sprint past your screen. 
 {{% /alert %}}
  
-10. Plot the output with `python postprocessing/plot_samples.py data/<timestamp>_config.yaml`.
-
+1. To use `plot_samples.py`, run `python postprocessing/plot_samples.py data/<timestamp>_config.yaml`. If you run this in the Raspberry Pi terminal, no plots will show up because the terminal doesn't have the capability. It will print out a distance but at the moment I don't think it is working.
+2. To get the plots to show up, you need to run the files on your laptop in the WSL (this was setup in the ORCA setup step).
+3. You will need to SCP the `_config.yaml` and `_rx_samps.bin` files to your laptop and save them in the data file in your branch or clone of the code. It can be easier to just SCP them into your laptop's download folder and use file explorer to drag it into the proper folder. 
+4. Open the WSL terminal (you can do this in VSCode, hit CTRL + `, and use the dropdown arrow to change the terminal type to WSL) 
+3. Activate the conda environment with `conda activate environment-name`. You should already be in your uhd_radar folder but if not, `cd` into it
+4. Run `python postprocessing/plot_samples.py data/<timestamp>_config.yaml`. All three graphs will show up at the same time. 
 
