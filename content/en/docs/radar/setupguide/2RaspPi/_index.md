@@ -51,7 +51,7 @@ The cloud-init setup is controlled by two files: `user-data` and `network-config
 
 Examples of each are shown below, but you will likely need to modify these to suit
 your purpose. We have pages on how to customize
-[network-config](/docs/radar/setupguide/3RaspPi/1networkconfig) and [user-data](/docs/radar/setupguide/3RaspPi/2userdataconfig).
+[network-config](/docs/radar/setupguide/2RaspPi/1networkconfig) and [user-data](/docs/radar/setupguide/2RaspPi/2userdataconfig).
 
 #### user-data Example
 {{< readfile file="/static/cloud-init/user-data" code="true" lang="yaml" >}}
