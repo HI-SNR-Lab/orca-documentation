@@ -12,7 +12,7 @@ tweak many of these settings. Descriptions and tips for the most important
 sections are below.
 
 Note that this is one of two key configuration files. You can read about
-[network-config here]({{< ref "network" >}}).
+[network-config here](/docs/radar/setupguide/2RaspPi/1networkconfig).
 
 ## Starting point user-data file
 
