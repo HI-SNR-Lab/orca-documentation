@@ -15,7 +15,8 @@ While indoors, make sure **not** to transmit any signals with the antenna. Only 
 When connecting any SMA cable, make sure to hold the cable and connection point still while you connect it so that the cable **does not spin** as you tighten the nut, as this can cause damage to the pin. Tighten the nut using the SMA torque wrench (the wrench will bend when the proper tightness is reached). 
 
 ### Spectrum Analyzer Test
-<img src="spec-ana-setup.jpg" alt="Example setup">
+
+<img src="../../../../images/spec-ana-setup.jpg" alt="example setup of spectrum analyzer test" width = "600">
 
 To test the program with the spectrum analyzer, you will need the following equipment: 
 * b205mini SDR 
@@ -39,11 +40,11 @@ To test the program with the spectrum analyzer, you will need the following equi
 4. Connect this cable to the SMA female-female adapter. 
 5. Connect the SMA female-female adapter to the “IN” port on the 30 dB attenuator. 
 6. Connect the other SMA cable to the “OUT” port on the 30 dB attenuator.
-<img src="step7-spec-ana.jpg" alt="Example setup">  
+<img src="../../../../images/step7-spec-ana.jpg" alt="example setup of spectrum analyzer test" width = "600">
 7. Connect this SMA cable to the SMA female to N-Type adapter. 
 8. Connect the SMA female to N-Type adapter to the “RF Input” port on the spectrum analyzer if it is not already connected. Take special care that the adapter does not spin while connecting it to this port. 
 9. Turn on the spectrum analyzer.
-<img src="step10-spec-ana.jpg" alt="Example setup">
+<img src="../../../../images/step10-spec-ana.jpg" alt="example setup of spectrum analyzer test" width = "600">
 10. Set the Spectrum Analyzer's frequency to the chirps' configured center frequency. 
 11. Set the span of the spectrum analyzer to a bandwidth that allows you to see your full chirp in detail. 
 12. Configure your spectrum analyzer to see the maximum value when sampled. 
@@ -61,7 +62,7 @@ To get any actual data from the SDR, we must both transmit and receive signals b
 
 **When connecting the b205mini to itself, you should always use a 30 dBm attenuator!**
 
-<img src="step10-spec-ana.jpg" alt="Example setup">
+<img src="../../../../images/loopback.jpg" alt="Example setup of loopback test" width="600">
 
 1. Follow the steps in the Spectrum Analyzer section above to set up the hardware and test it with the spectrum analyzer. Confirm that the program works and the peak power is less than -15dBm. 
 2. Stop all transmissions, and do not transmit again until everything has been reconnected. You can unplug the SDR from the Pi to ensure this cannot happen. 
@@ -117,11 +118,11 @@ This is how to edit the `zero_sample_idx`. You need to first run the code so you
 3. Activate the conda environment with `conda activate environment-name`. You should already be in your uhd_radar folder but if not, `cd` into it
 4. Run `python processing/test_scripts/test_loopback.py data/timestamp_config.yaml` where timestamp is edited to whatever config file you have saved in data. 
 5. The first graph that appears is the chirp, you want to close this to allow the next graph to appear. The next graph will be matched filter, also close this.
-6. Here is an example of what the graph will look like. You want to use the magnifying glass and zoom in on the sharp corner.  
-<img src="raw-matched-output.png" width="500"> 
+6. Here is an example of what the graph will look like. You want to use the magnifying glass and zoom in on the sharp corner. 
+<img src="../../../../images/raw-matched-output.png" alt="Raw matched output graph" width = "500">
 
 7. When you hover your mouse over the first point, the x position will indicate what the `zero_sample_idx` is. 
-<img src="zoomed-raw-output.png" width="500">
+<img src="../../../../images/zoomed-raw-output.png" alt="Zoomed in on raw matched output graph" width = "500">
 
 8. You can now edit the variable in the `loopback_testing.py` file, NOT the `test_looback.py` file. It is in the definition of the `plot_matched` function. It is the last parameter that is defined, all the way to the right. 
 
@@ -129,18 +130,18 @@ The default length for the `cable_length` and `coax_length` is 50 m. If you aren
 
 1. Open the `loopback_testing.py` file
 2. You can CTRL + F to find the `cable_length`. It will be beneath the `plot_matched` function definition. 
-<img src="change-cable-length.png" width="500">
+<img src="../../../../images/change-cable-length.png" alt="Picture of where to change cable length in code" width = "500">
 
 3. To change `coax_length`, this variable will be at the bottom of the same file in the `main` function. When `plot_matched` is called, `coax_length` is given a value of 50. Change this to however long the cable is.  
-<img src="change-coax-length.png" width="800">
+<img src="../../../../images/change-coax-length.png" alt="Picture of where to change coax length in code" width = "800">
 
 Now that all the variables are edited, you can run `test_loopback.py` and have accurate results.
 1. Run `python processing/test_scripts/test_loopback.py data/timestamp_config.yaml` with timestamp edited to whatever config file you have saved in data.
 2. After closing the first chirp file you will see the matched filter. After zooming in on the beginning of the graph, it might look something like this. You can see that there is a slight peak at 50 m. The peak at 0 is higher because the noise traveling directly from trasmit to receiver part is louder. Not sure if this is just an issue of my set up. 
-<img src="rectangle-matched-filter.png" width="500">
+<img src="../../../../images/rectangle-matched-filter.png" alt="Matched filter graph with rectangle window" width = "500">
 
 3. It can be easier to see the peak using the "blackman" chirp window.
-<img src="blackman-matched-filter.png" width="500">
+<img src="../../../../images/blackman-matched-filter.png" alt="Matched filter graph with blackman window" width = "500">
 
 
 
