@@ -62,7 +62,7 @@ jobs:
         
 
       - name: Installing dependecies
-        run: npm install
+        run: npm list adm-zip && rm -rf node_modules package-lock.json && npm install
 
       - name: Print adm version
         run: npm list adm-zip
