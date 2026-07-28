@@ -59,8 +59,7 @@ jobs:
       - name: Configure Git
         run: git config core.quotepath false
 
-      - name: print
-        run: npm list adm-zip
+      
 
       - name: remove lock 
         run:  rm -rf node_modules package-lock.json
