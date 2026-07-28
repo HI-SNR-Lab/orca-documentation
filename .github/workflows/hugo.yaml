@@ -64,6 +64,9 @@ jobs:
 
       - name: Print adm version
         run: npm list adm-zip
+
+      - name: Print npm version
+        run: npm -v
       
       - name: Install postcss-cli
         run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix
