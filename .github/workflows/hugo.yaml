@@ -67,6 +67,7 @@ jobs:
           hugo \
             --gc \
             --minify \
+            --logLevel debug \
             --cacheDir "${{ runner.temp }}/hugo_cache"
 
       - name: Cache Save
