@@ -64,14 +64,17 @@ jobs:
       - name: remove lock 
         run:  rm -rf node_modules package-lock.json
 
-      - name: reinstall
-        run: npm install --legacy-peer-deps && npm install adm-zip@0.6.0 --force
+      - name: install admzip
+        run: npm install adm-zip@0.6.0 --force
+
+      - name: install hugo extended
+        run: npm install hugo-extended@0.164.0 --no-optional
+
+      - name: install others
+        run: npm install
 
       - name: Print adm version
         run: npm list adm-zip
-
-      - name: Print npm version
-        run: npm -v
       
       - name: Install postcss-cli
         run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix
