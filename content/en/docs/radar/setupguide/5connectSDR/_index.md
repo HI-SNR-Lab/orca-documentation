@@ -16,9 +16,6 @@ When connecting any SMA cable, make sure to hold the cable and connection point 
 
 ### Spectrum Analyzer Test
 
-{{% imgproc spec-ana-setup.jpg Fit "1000x450"%}}
-Example setup of spectrum analyzer test
-{{% /imgproc %}}
 
 To test the program with the spectrum analyzer, you will need the following equipment: 
 * b205mini SDR 
@@ -42,15 +39,9 @@ To test the program with the spectrum analyzer, you will need the following equi
 4. Connect this cable to the SMA female-female adapter. 
 5. Connect the SMA female-female adapter to the “IN” port on the 30 dB attenuator. 
 6. Connect the other SMA cable to the “OUT” port on the 30 dB attenuator.
-{{% imgproc step7-spec-ana.jpg Fit "800x250"%}}
-IN side of attenuator connected to the TX port
-{{% /imgproc %}}
 7. Connect this SMA cable to the SMA female to N-Type adapter. 
 8. Connect the SMA female to N-Type adapter to the “RF Input” port on the spectrum analyzer if it is not already connected. Take special care that the adapter does not spin while connecting it to this port. 
 9. Turn on the spectrum analyzer.
-{{% imgproc step10-spec-ana.jpg Fit "800x300"%}}
-Highlighted spots on the spectrum analyzer that will be used
-{{% /imgproc %}}
 10. Set the Spectrum Analyzer's frequency to the chirps' configured center frequency. 
 11. Set the span of the spectrum analyzer to a bandwidth that allows you to see your full chirp in detail. 
 12. Configure your spectrum analyzer to see the maximum value when sampled. 
@@ -68,8 +59,6 @@ To get any actual data from the SDR, we must both transmit and receive signals b
 
 **When connecting the b205mini to itself, you should always use a 30 dBm attenuator!**
 
-{{% imgproc loopback.jpg Fit "800x375"%}}
-{{% /imgproc %}}
 
 1. Follow the steps in the Spectrum Analyzer section above to set up the hardware and test it with the spectrum analyzer. Confirm that the program works and the peak power is less than -15dBm. 
 2. Stop all transmissions, and do not transmit again until everything has been reconnected. You can unplug the SDR from the Pi to ensure this cannot happen. 
@@ -126,12 +115,8 @@ This is how to edit the `zero_sample_idx`. You need to first run the code so you
 4. Run `python processing/test_scripts/test_loopback.py data/timestamp_config.yaml` where timestamp is edited to whatever config file you have saved in data. 
 5. The first graph that appears is the chirp, you want to close this to allow the next graph to appear. The next graph will be matched filter, also close this.
 6. Here is an example of what the graph will look like. You want to use the magnifying glass and zoom in on the sharp corner. 
-{{% imgproc raw-matched-output.png Fit "800x425"%}}
-{{% /imgproc %}}
 
 7. When you hover your mouse over the first point, the x position will indicate what the `zero_sample_idx` is. 
-{{% imgproc zoomed-raw-output.png Fit "800x425"%}}
-{{% /imgproc %}}
 
 8. You can now edit the variable in the `loopback_testing.py` file, NOT the `test_looback.py` file. It is in the definition of the `plot_matched` function. It is the last parameter that is defined, all the way to the right. 
 
@@ -139,23 +124,14 @@ The default length for the `cable_length` and `coax_length` is 50 m. If you aren
 
 1. Open the `loopback_testing.py` file
 2. You can CTRL + F to find the `cable_length`. It will be beneath the `plot_matched` function definition.
-{{% imgproc change-cable-length.png Fit "500x425"%}}
-{{% /imgproc %}}
 
 3. To change `coax_length`, this variable will be at the bottom of the same file in the `main` function. When `plot_matched` is called, `coax_length` is given a value of 50. Change this to however long the cable is. 
-{{% imgproc change-coax-length.png Fit "600x425"%}}
-{{% /imgproc %}}
 
 Now that all the variables are edited, you can run `test_loopback.py` and have accurate results.
 1. Run `python processing/test_scripts/test_loopback.py data/timestamp_config.yaml` with timestamp edited to whatever config file you have saved in data.
 2. After closing the first chirp file you will see the matched filter. After zooming in on the beginning of the graph, it might look something like this. You can see that there is a slight peak at 50 m. The peak at 0 is higher because the noise traveling directly from trasmit to receiver part is louder. Not sure if this is just an issue of my set up. 
-{{% imgproc rectangle-matched-filter.png Fit "500x425"%}}
-{{% /imgproc %}}
-
-
 3. It can be easier to see the peak using the "blackman" chirp window.
-{{% imgproc blackman-matched-filter.png Fit "500x425"%}}
-{{% /imgproc %}}
+
 
 
 
