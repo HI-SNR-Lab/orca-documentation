@@ -60,7 +60,7 @@ jobs:
         run: git config core.quotepath false
       
       - name: Install postcss-cli
-        run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix
+        run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix --force
   
       - name: Build with Hugo
         run: |
@@ -68,7 +68,6 @@ jobs:
             --gc \
             --minify \
             --logLevel debug \
-            npm audit fix --force \
             --cacheDir "${{ runner.temp }}/hugo_cache"
 
       - name: Cache Save
