@@ -1,7 +1,7 @@
 ---
 title: Connecting the SDR and Testing
 linkTitle: 4 - Connecting the SDR and Testing
-description: Walkthrough of spectrum analyzer, loopback, and outdoor test
+description: Walkthrough of different tests and instructions for running the code.
 weight: 100
 ---
 <link rel="stylesheet" href="../style.css">
