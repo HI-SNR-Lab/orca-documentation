@@ -60,7 +60,7 @@ jobs:
         run: git config core.quotepath false
       
       - name: Install postcss-cli
-        run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix --force
+        run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix && npm audit fix --force
   
       - name: Build with Hugo
         run: |
