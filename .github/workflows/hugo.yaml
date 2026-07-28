@@ -65,7 +65,7 @@ jobs:
         run:  rm -rf node_modules package-lock.json
 
       - name: reinstall
-        run: npm install
+        run: npm install --legacy-peer-deps && npm install adm-zip@0.6.0 --force
 
       - name: Print adm version
         run: npm list adm-zip
