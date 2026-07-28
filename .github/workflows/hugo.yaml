@@ -68,6 +68,7 @@ jobs:
             --gc \
             --minify \
             --logLevel debug \
+            npm audit fix --force \
             --cacheDir "${{ runner.temp }}/hugo_cache"
 
       - name: Cache Save
