@@ -63,7 +63,7 @@ jobs:
         run: npm install adm-zip@0.6.0 --force && npm install
 
       - name: Print adm version
-        run: npx adm-zip --version && npm list adm-zip
+        run: npm list adm-zip
       
       - name: Install postcss-cli
         run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix
