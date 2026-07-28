@@ -34,9 +34,10 @@
     "autoprefixer": "^10.4.24",
     "hugo-extended": "0.164.0",
     "postcss": "^8.5.6",
-    "postcss-cli": "^10.1.0"
+    "postcss-cli": "^10.1.0",
+    "adm-zip": "^0.6.0"
   },
   "overrides": {
-    "adm-zip": "^0.6.0"
+    "adm-zip": "0.6.0"
   }
 }
