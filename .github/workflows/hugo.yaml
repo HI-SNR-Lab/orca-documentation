@@ -59,8 +59,10 @@ jobs:
       - name: Configure Git
         run: git config core.quotepath false
 
-      - name: Installing adm-zip and dependecies
-        run: npm install adm-zip@0.6.0 --force && npm install
+        
+
+      - name: Installing dependecies
+        run: npm install
 
       - name: Print adm version
         run: npm list adm-zip
