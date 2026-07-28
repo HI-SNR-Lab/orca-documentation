@@ -59,10 +59,14 @@ jobs:
       - name: Configure Git
         run: git config core.quotepath false
 
-        
+      - name: print
+        run: npm list adm-zip
 
-      - name: Installing dependecies
-        run: npm list adm-zip && rm -rf node_modules package-lock.json && npm install
+      - name: remove lock 
+        run:  rm -rf node_modules package-lock.json
+
+      - name: reinstall
+        run: npm install
 
       - name: Print adm version
         run: npm list adm-zip
