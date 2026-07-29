@@ -59,16 +59,11 @@ jobs:
       - name: Configure Git
         run: git config core.quotepath false
 
-      
-
       - name: remove lock 
         run:  rm -rf node_modules package-lock.json
 
-      - name: install admzip
-        run: npm install adm-zip@0.6.0 --force
-
-      - name: install hugo extended
-        run: npm install hugo-extended@0.164.0 --omit=optional
+      - name: install everything
+        run: npm install
 
       - name: Print adm version
         run: npm list adm-zip
