@@ -70,9 +70,6 @@ jobs:
       - name: install hugo extended
         run: npm install hugo-extended@0.164.0 --omit=optional
 
-      - name: install others
-        run: npm install
-
       - name: Print adm version
         run: npm list adm-zip
       
