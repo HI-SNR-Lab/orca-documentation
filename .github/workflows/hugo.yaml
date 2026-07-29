@@ -68,7 +68,7 @@ jobs:
         run: npm install adm-zip@0.6.0 --force
 
       - name: install hugo extended
-        run: npm install hugo-extended@0.164.0 --no-optional
+        run: npm install hugo-extended@0.164.0 --omit=optional
 
       - name: install others
         run: npm install
