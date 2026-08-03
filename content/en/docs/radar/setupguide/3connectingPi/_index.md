@@ -286,8 +286,8 @@ or you can put them all in the same line if you don't put any slashes
 6. Turn back on the connection with `sudo nmcli connection up "wifi connection"`
 7. Now if you do `hostname -I` it should be the static IP address you chose and you can ssh to it with this IP address
 
-{{% alert title="Bugging SSH connection?" color="info" %}}
-If the wifi static IP address bugs out and you can't ssh into the Pi, try restarting the Pi. Also try setting the ipv4.method back to auto then back to manual with `sudo nmcli connection modify "wifi connection" ipv4.method auto` and `sudo nmcli connection modify "wifi connection" ipv4.method manual`
+{{% alert title="Bugging SSH connection?/Wi-Fi connection" color="info" %}}
+If the wifi static IP address bugs out and you can't ssh into the Pi OR the Pi stops connecting to the internet (can't ping google.com or 8.8.8.8), try restarting the Pi. Also try setting the ipv4.method back to auto then back to manual with `sudo nmcli connection modify "wifi connection" ipv4.method auto` and `sudo nmcli connection modify "wifi connection" ipv4.method manual`. I haven't figured out what is causing this so if you do figure it out feel free to add to the documentation!
 {{% /alert %}}
 
 **Setting a static IP address when the Pi acts like a hotspot**
