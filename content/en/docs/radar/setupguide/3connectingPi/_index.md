@@ -44,18 +44,18 @@ network. If you setup some sort of key-based authentication (such as by
 importing a key from GitHub), it may take an extra couple of minutes for
 this to be ready.
 
-After the network setup is complete, you should be able to login over SSH.
+After the network setup is complete, you should be able to login over SSH if you edited the user-data file to import your SSH key. However if that process failed, then you'll have to manually import your SSH key. 
 
 In particular, please note that you need to have SSH agent forwarding working on your laptop.
-You should have already done this under [ORCA Setup](/docs/radar/setupguide/2ORCAsetup) when you first made your SSH key. You can test that everything is working by running `ssh -T git@github.com`.
+You should have already done this under [ORCA Setup](/docs/radar/setupguide/2ORCAsetup) when you first made your SSH key. You can test that everything is working by running `ssh -T git@github.com` on your laptop.
 
-When you first login, cloud-init may not have finished running. To check the status, run:
+When you first login to the Pi, cloud-init may not have finished running. To check the status, run:
 
 ```
 cloud-init status --long
 ```
 
-There are also logs in `/var/log/cloud-init-output.log`. 
+There are also logs in `/var/log/cloud-init-output.log` (you can read with `cat` or `less`). 
 
 To keep an eye on the entire process, you can run:
 
@@ -66,13 +66,13 @@ watch "cloud-init status --long && tail -n 10 /var/log/cloud-init-output.log"
 Expect this process to take a few minutes to complete.
 
 #### Initial Setup
-When you are able to start running commands, run `./initial_setup.sh`. This will log to `/home/ubuntu/initial_setup_output.log`. It may take around 10 minutes to complete. It will automatically reboot your Pi at the end. If you don’t want this, feel free to comment out the last line. 
+When you are able to start running commands, run `./initial_setup.sh`. This will log to `/home/ubuntu/initial_setup_output.log`. It may take around 10 minutes to complete. It will automatically reboot your Pi at the end. If you don’t want this, feel free to comment out the last line. If you don't know where this line is, it is fine to just leave it to reboot. 
 <!-- mcscuse me , what last line. where. how???? -->
 
-After this process finishes running, run `ping 8.8.8.8` to test if it is connected to wifi/ethernet. If the Pi isn't connected, it will say "Network is unreachable". If the Pi is connected, it will start detecting bytes sent by the address. Hit `CTRL + C` to stop the pinging. 
+After this process finishes running, run `ping 8.8.8.8` to test if it is connected to wifi/ethernet. If the Pi isn't connected, it will say "Network is unreachable". If the Pi is connected, it will start detecting bytes sent by the address. Hit `CTRL + C` to stop the pinging. It will then give you a report of how much loss there was. You want to have 0 loss.  
 
 {{% alert title="Not connecting to your wifi/ethernet?" color="info" %}}
-If the Pi isn't connecting to the wifi, the network-config file might not be formatted properly. One issue that I ran into was using "wlp2s0b1:" under the "wifis:" section (I was connecting to a laptop's mobile hotspot). If you run `ip link` it will list the different formats that it is looking for. In my case, it was looking for "wlan0" for wifi or "eth0" for ethernet. 
+If the Pi isn't connecting to the wifi, the network-config file might not be formatted properly. One issue that I ran into was using "wlp2s0b1:" instead of "wlan0" under the "wifis:" section. If you run `ip link` it will list the different formats that it is looking for. In my case, it was looking for "wlan0" for wifi or "eth0" for ethernet. 
 
 Here is how to edit your network-config files without having to take the SD card out.
 
@@ -87,13 +87,13 @@ Here is how to edit your network-config files without having to take the SD card
 You can log in and run commands directly with the keyboard (no mouse inputs). There is no way to scroll up through this terminal however, so if you want to be able to read a long output from a command you must pipe it into a file (ex. `python run.py >> terminal_output.txt`), then read the text file using nano. 
 
 ### Importing Your SSH Key
-You then need to add this SSH to the Pi. The simplest method is to first add the key to your GitHub account, then import it onto the Pi from there. If you don’t want to set up GitHub, you can add the key directly with a little extra work.
+You then need to add this SSH to the Pi. The simplest method is to first add the key to your GitHub account, then import it onto the Pi from there. If you don’t want to set up GitHub, you can add the key directly with a little extra work (though you may have typos which can make it difficult!).
 
 **With GitHub:** 
-1. You should have already added the SSH key to your GitHub account. 
-2. Run `ssh-import-id gh:<your-github-username>` on the Raspberry Pi with the direct control
+1. You should have already added the SSH key to your GitHub account.  
+2. Run `ssh-import-id gh:<your-github-username>` on the Raspberry Pi with the direct control. 
 
-If you haven't yet, do the following:
+If you haven't yet added your key to GitHub, do the following:
 
 1. Create an account on GitHub and sign in. 
 2. In GitHub, open settings and go to the SSH and GPG keys tab and add a new SSH key. 
@@ -110,7 +110,7 @@ If you haven't yet, do the following:
 
 You should now have permission to SSH into the Pi from your laptop using one of the following methods (wifi or ethernet). 
 
-Modify your `~/.ssh/config` file (use `nano ~/.ssh/config`) and add an entry like this enabling SSH agent forwarding (or don't, you likely already set up SSH agent forwarding on your laptop so I don't think you need to do this):
+Modify your `~/.ssh/config` file (use `nano ~/.ssh/config`) and add an entry like this enabling SSH agent forwarding (or don't, you likely already set up SSH agent forwarding on your laptop so I don't think you need to do this. I didn't do this and it worked fine for me):
 
 ```
 Host 192.168.11.137
@@ -148,13 +148,13 @@ know exactly why you're getting this error. You should only have to do this once
 per new Pi.)
 {{% /alert %}}
 
-{{% alert title="" color="info" %}}
-You might be able to just run `ssh ubuntu@<pi-ip-address>` on your Pi to SSH connect. The direct connect and internet connection should already exist since you needed them previously to import your GitHub key. You can get your Pi's IP address by running `hostname -I` or `ip a` (in my opinion, using `hostname -I` is easier cause you don't need to hunt for the ip info).
+{{% alert title="General Network Tip" color="info" %}}
+If you ever are struggling and Google another tutorial that uses dnsmasq or dhcpcd, check if your Pi uses NetworkManager!!! It is a lot easier to use than the two mentioned above (in my opinion). The newer Raspberry Pi's use this and ignore the dnsmasq and dhcpcd. 
 {{% /alert %}}
 
 ### SSH over Ethernet:
 
-**This is the preferred method for connecting to and controlling the Pi** , and the only method that does not require the Pi to be connected to a router or Wi-Fi network. However, it does take a bit of setup the first time. 
+This is a good method because the Pi is not required to be connected to a router or Wi-Fi network. However, it does take a bit of setup the first time. This method can be good if you are outside with no access to internet. There is also the SSH over Hotspot method which is also good when you are outside and you won't need ethernet cables. 
 
 For this method, you will need: 
    - Laptop connected to Wi-Fi 
@@ -191,14 +191,18 @@ For this method, you will need:
 
 This method is nice as it requires less cables and can be used for connecting multiple devices, **however you will have to use one of the other methods such as SSH over Ethernet initially to find the Pi’s internet IP address.** 
 
+{{% alert title="" color="info" %}}
+You might be able to just run `ssh ubuntu@<pi-ip-address>` on your Pi to SSH connect. If you chose a different username than ubuntu, than replace the command with that. The direct connect and internet connection should already exist since you needed them previously to import your GitHub key. You can get your Pi's IP address by running `hostname -I` or `ip a` (in my opinion, using `hostname -I` is easier cause you don't need to hunt for the ip info). If you chose a different login username, replace ubuntu with that.
+{{% /alert %}}
+
 For this method, you will need: 
    - Laptop connected to Wi-Fi 
    - Raspberry Pi 5 
    - Pi Power Supply (plugged into wall) 
    - Ethernet cable connected to a router (or to the ethernet port on the wall of the lab) if not connecting the Pi to Wi-Fi 
 
-1. Plug the ethernet and power cable into the Pi and turn it on. 
-2. If you do not know what the Pi’s current IP address is, you must first use the Direct Control method above to get access to the terminal. When the Pi first boots, system information is printed to the terminal. In the bottom right corner of this message, you should see a section that says “IPv4 address for eth0: 128.138.189.xxx”. You can also find the IP address by running `ip a` and looking for the address under the `eth0` **This address may change each time the Pi is reconnected to the internet.** 
+1. Plug the ethernet and power cable into the Pi and turn it on. Or if the Pi is connected to Wi-Fi just leave it as is. 
+2. If you do not know what the Pi’s current IP address is, you must first use the Direct Control method above to get access to the terminal. You can run `hostname -I` and it will print out the IP address. Another way is when the Pi first boots, system information is printed to the terminal. In the bottom right corner of this message, you should see a section that says “IPv4 address for eth0 (or wlan0): 128.138.189.xxx”. You can also find the IP address by running `ip a` and looking for the address under the `eth0` (or wlan0).  **This address may change each time the Pi is reconnected to the internet.** This means you will consistently need direct control to see the IP address unless you set a static IP address. Information on how to do this is below. 
 3. Connect your laptop to a wifi network. 
 4. Check if you can find the Pi over the internet by running the command 
 `ping -c 1 your.pi.ip.address`. On Windows, this must be done in PowerShell with admin privileges, not WSL. If it says 0 packets received, then either the IP address is incorrect, or you are not on the same network as the Pi. 
@@ -209,10 +213,96 @@ For this method, you will need:
 If you SSH into your pi from your laptop, you can type `exit` or `logout` to turn your powershell back to normal.
 {{% /alert %}}
 
+### SSH Over Hotspot:
+This method is good for the outdoors where there is no Wifi/internet connection. It allows you to SSH into the Pi without internet connection, similar to SSH over ethernet, but you also won't need an ethernet cable. If you use this method, the Pi will not be able to access a Wi-Fi internet connection at the same time, so you won't be able to clone the repository or pull from the repository. This setup will require direct control, but afterwards you won't need direct control again.
+
+For this method, you will need:
+- Laptop
+- Raspberry Pi 5
+- USB keyboard connected to the Pi (direct control)
+- Monitor connected to the Pi (direct control)
+- Pi Power supply
+
+1. This method uses NetworkManager and your Pi's connections need to be controlled with NetworkManager. Check if your netplan's renderer is NetworkManager, if not, change it to NetworkManager. 
+   1. Run `ls /etc/netplan/`. It should show a .yaml.
+   2. Run `sudo nano /etc/netplan/FILENAME.yaml`. This allows you to open and edit the file. 
+   3. Change whatever you need to, then hit `CTRL + X`, then `y`, then hit enter. This saves your edits.
+   4. Run `sudo netplan apply` to apply these changes
+   5. Try `ping 8.8.8.8` again to see if is connected now. Hit `Ctrl + C` to stop the pinging and check that there is no packet loss. 
+   6. You may need to run `sudo reboot`
+2. Run `sudo apt update` and `sudo apt update -y`
+3. Run `iwconfig` to see the names for the different connection tools. We want the wifi one which is commonly `wlan0` but it may not be the same for your Pi. It will be the one with information of IEEE and ESSID
+4. DEVICE is the name of the wifi device (commonly wlan0). SSID is the name of the broadcast of the Pi. It will be what your laptop connects to. PASSWORD is the password for the connection. Run `sudo nmcli d wifi hotspot ifname DEVICE ssid SSID password PASSWORD` 
+5. You can check that it has been created by running `nmcli connection show`. It will look something like this
+```
+NAME                UUID                                  TYPE      DEVICE
+Hotspot             59f9160c-b49f-47a2-ac54-87987f743df2  wifi      wlan0
+Wired connection 1  9d27eb3e-7657-3a54-ad8a-344cb4bb56e3  ethernet  eth0
+lo                  a54edcc4-0ffa-4090-a2b3-081905aee1c5  loopback  lo
+preconfigured       6e07c33c-9764-4145-af3f-49875c8a9342  wifi      --
+```
+If you are connected to wifi, you will see that at the top with the wlan0 device while Hotspot's device will be blank.
+
+6. To swap to the Hotspot run `nmcli connection up "Hotspot"` and to swap back to your wifi replace Hotspot with whatever the name is for your wifi connection. While swapping connections the Pi may freak out and print an error along the lines of `brcmfmac: brcmf_set_channel: set chanspec fail, reason -52`. This happens whenever the Pi loses connection and isn't a big issue. 
+7. If the putting the hotspot up fails with an error of `Connection: activation failed: IP configuration could not be reserved` try the following steps
+   1. Run `sudo nmcli connection modify "Hotspot" ipv4.method shared` 
+   2. Run `sudo systemctl stop dnsmasq`
+   3. Run `sudo systemctl restart NetworkManager`
+   4. Run `sudo nmcli connection up "Hotspot"`
+   5. If this works now, the problem is likely dnsmasq so we need to turn it off permenantly so it won't turn back on and break the Hotspot when you reboot the Pi. 
+   6. Run `sudo systemctl disable dnsmasq`
+   7. Run `sudo systemctl mask dnsmasq`
+   8. Run `sudo reboot`
+   9. Now if you run `systemctl status dnsmasq` it should say that it inactive (dead)
+8. Since you rebooted the Pi, you may need to turn on the hotspot again with `nmcli connection up "Hotspot"`. It should say succesfully activated and you should see the Pi's hotspot when you open your wifi connections on your laptop. You can now connect to this.
+9. Run `ipconfig` on your laptop's powershell after connecting (may be a different command if not on a windows device) and look at the IP address after Default Gateway under the Wi-Fi section. This is the IP address of the PI. 
+10. Run `ssh ubuntu@your.pi.ip.address` to SSH into the Pi. 
+
+The next steps are optional but makes it so your Hotspot will be the default connection your Pi does. This makes it so if you are outside and need to connect to the Pi, you can do so immediately without needed direct control to swap the network connection from wifi to the hotspot. The default connection for the Pi seems to be Wi-Fi. 
+
+11. Run `sudo nmcli connection modify "Hotspot" connection.autoconnect true`
+12. Run `sudo nmcli connection modify "Hotspot" connection.autoconnect-priority 100`
+13. Run `sudo nmcli connection modify "wifi connection" connection.autoconnect-priority 10` Rename "wifi connection" to whatever the name of your wifi connection is. You can check what it is with `nmcli connection show`. The first autoconnect priority is the higher number.
+
+Now if you reboot the Pi, it will automatically open the hotspot first. 
+
+### Setting Static IP Addresses
+Setting a static IP address makes it very convenient because you won't need to use direct control to see the Pi's IP address everytime you want to SSH into it. 
+
+**Setting a static IP address when the Pi connects to wifi**
+1. Run `hostname -I` to show your current IP. You can use the same one or don't. 
+2. Run `ip r | grep default` and check the IP that is after the word via. That is your default gateway.
+3. Run `nmcli connection show` to find the name of your wifi connection 
+4. Run 
+```
+sudo nmcli connection modify "your wifi name" \
+ipv4.addresses your.chosen.static.ip/24 \
+ipv4.gateway default.gateway.ip.address \
+ipv4.dns default.gateway.ip.address \
+ipv4.method manual
+```
+or you can put them all in the same line if you don't put any slashes
+5. Turn off the connection with `sudo nmcli connection down "wifi connection"`
+6. Turn back on the connection with `sudo nmcli connection up "wifi connection"`
+7. Now if you do `hostname -I` it should be the static IP address you chose and you can ssh to it with this IP address
+
+{{% alert title="Bugging SSH connection?" color="info" %}}
+If the wifi static IP address bugs out and you can't ssh into the Pi, try restarting the Pi. Also try setting the ipv4.method back to auto then back to manual with `sudo nmcli connection modify "wifi connection" ipv4.method auto` and `sudo nmcli connection modify "wifi connection" ipv4.method manual`
+{{% /alert %}}
+
+**Setting a static IP address when the Pi acts like a hotspot**
+1. Swap back to using your hotspot connection with `nmcli connection up "Hotspot"`
+2. Run `hostname -I` to check your current IP address. You can chose this to be your static IP address.
+3. Run `sudo nmcli connection modify "Hotspot" ipv4.addresses static.ip.you.chose/24` do not leave out the /24.
+4. Turn on and off the hotspot connection with `nmcli connection down "Hotspot"` and `nmcli connection up "Hotspot"`
+5. The IP address should now be static so you no longer have to check the Pi's IP address with `ipconfig` whenever you connect to the hotspot.
+
+Now you won't really need direct connection to control the PI because you can always SSH into it from elsewhere. When you SSH into the Pi, you are still able to swap the connection you just need to add sudo to the front. Example `sudo nmcli connection up "wifi connection"`.
+
 
 ## Cloning the Repository onto the Pi
 
-Run `git clone https://github.com/username/repositoryname` to add the uhd-radar github repository to the Pi. If you don't have the `https://` it won't work. Using SSH (the link that ends with .git) also won't work because your Pi doesn't have your laptop's private key. Don't give your Pi your private SSH key.
+You need to be connected to the internet for this to work. Run `git clone https://github.com/username/repositoryname` to add the uhd-radar github repository to the Pi. If you don't have the `https://` it won't work. Using SSH (the link that ends with .git) also won't work because your Pi doesn't have your laptop's private key. Don't give your Pi your private SSH key.
 
 ## Transferring files to and from the Pi:
 
@@ -247,11 +337,11 @@ Example:
 When using these commands, you are typing them on your laptop powershell. You are either pushing from your laptop to the Pi, or you are using your laptop to pull from the Pi. You can also push from the Pi but that's a different command. 
 
 ## Installing Miniconda
-1. First go to Anaconda's [website](https://www.anaconda.com/download) and scroll to the bottom to download Miniconda. You will want the Linux 64-Bit ARM64 version.
+1. First go to Anaconda's [website](https://www.anaconda.com/download) and scroll to the bottom to download Miniconda. You will want the **Linux 64-Bit ARM64 version**.
 2. Once the file is downloaded, you will want to use SCP to get the file onto the Pi. Make sure you have connected to the Pi using SSH. The command might look something like `scp .\Downloads\Miniconda3-latest-Linux-aarch64.sh ubuntu@192.168.137.131:~/`. 
 3. Within the Raspberry Pi's terminal, run `bash location-to-file/Miniconda3-latest-Linux-aarch64.sh` and accept the default options in the installer (select yes when prompted about auto_activate_base, though we will change this later)
 4. After Miniconda is installed, reboot the Raspberry Pi with `sudo reboot now`
-5. To ensure it has been installed, run “conda list” and you should see a list of the installed dependencies printed out. 
+5. To ensure it has been installed, run `conda list` and you should see a list of the installed dependencies printed out. 
 6. We are now going to change one of the default settings with the command `conda config --set auto_activate_base false`
 
 {{% pageinfo %}}

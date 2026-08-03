@@ -51,7 +51,7 @@ The cloud-init setup is controlled by two files: `user-data` and `network-config
 
 Examples of each are shown below, but you will likely need to modify these to suit
 your purpose. We have pages on how to customize
-[network-config](/docs/radar/setupguide/2RaspPi/1networkconfig) and [user-data](/docs/radar/setupguide/2RaspPi/2userdataconfig).
+[network-config](/docs/radar/setupguide/2RaspPi/1networkconfig) and [user-data](/docs/radar/setupguide/2RaspPi/2userdataconfig). If you are trying to connect to an enterprise Wi-Fi like a university's guest wifi, maybe you need to contact OIT to get your device whitelisted. This is how it is at CU Boulder, and I have no idea about how other university's Wi-Fis work. 
 
 #### user-data Example
 {{< readfile file="/static/cloud-init/user-data" code="true" lang="yaml" >}}

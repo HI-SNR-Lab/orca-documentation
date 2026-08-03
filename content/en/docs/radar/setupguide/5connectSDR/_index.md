@@ -156,3 +156,52 @@ Now that all the variables are edited, you can run `test_loopback.py` and have a
 3. Activate the conda environment with `conda activate environment-name`. You should already be in your uhd_radar folder but if not, `cd` into it
 4. Run `python postprocessing/plot_samples.py data/<timestamp>_config.yaml`. All three graphs will show up at the same time. 
 
+## Outdoor Testing
+### Testing with Antennas
+
+The instructions below are a general idea on how to conduct an outdoor test. It is very open to different changes that suit your needs.
+
+- Wagon/trolley to carry your supplies 
+- Large Plastic bins to use as a table or a table
+- 2 Tripods to hold the antennas 
+- 2 Tripod-antenna adapters (allows the antennas to sit stably)
+- 2 Vivaldi antennas 
+- 300ft Extension cable or if you have another way to get power (power bank?) but becareful of it being loud in the electromagnetic sense
+- Power strip (optional, but useful if you need to charge your laptop, power a monitor, power multiple Raspberry Pi’s, etc.) 
+- 300 ft Measuring tape 
+- b205mini SDR 
+- USB 3.0 Micro B cable (connecting SDR to Pi) 
+- Raspberry Pi 5 
+- Raspberry Pi 5 Power Supply (USB C) 
+- Ethernet cable (connecting Pi to Laptop) if using hotspot SSH method you can leave this but if it's easy to bring no harm in a backup plan
+- Ethernet to USB C adapter (if your laptop doesn't have ethernet) 
+- 3 1-meter SMA male-male cables  
+- SMA female-female adapter (or replace one of the male-male cables with a male-female cable) 
+- 30 dB inline attenuator 
+- SMA torque wrench 
+- Screwdriver kit 
+- Umbrella or blanket for shade (so you can see your computer screen) 
+- Tarp for wet grass or snow 
+- Sunscreen 
+- Drinking Water (if it’s summer/hot outside) 
+
+You will want an area with a clear view of a flat concrete/stone wall with no people/cars in the way, few reflections from the side, access to a power outlet within 300 ft (or however many ft long your extension cord is), and a Wi-Fi connection (or mobile hotspot) (you don’t need a Wi-Fi connection as long as the Pi is set up to be a hotspot), all while not getting in other people's way.
+
+1. The minimum distance you need to be away from the wall will depend on your bandwidth. The larger your bandwidth, the closer you can be to the wall. If you are too close for the size of your bandwidth, the noise that occurs from signals traveling directly from the transmitter to receiver will blend with the peak of power from when the signal comes back from the wall. You won't be able to see how far the radar thinks the wall is. 
+    - A 10 MHz bandwidth needs a minimum of 100 m (about 328 ft) but 150 m is probably more preferable.
+2. At your desired test location, place a surface (stacked plastic bins, table, etc) on the ground. You will use this surface for the Pi, SDR, etc later.  
+3. Set two tripods on the left and right of your surface. You want at least a meter of separation between the two antennas.  
+4. Attach tripod adapters to the top of the tripod. 
+5. Put the antennas on the stands. The arrows point in the direction of energy travel.  
+6. Go plug in the extension cord (or whatever power source you're using). It may be helpful to bring something to check if the power from the outlet works (ex: a charger and a phone) 
+7. Set both the SDR and Raspberry Pi on top of the bins (or table, surface, etc)
+8. Use one of the SMA cables to connect an antenna to the TX port on the SDR. 
+9. Use the other SMA cable to connect the other antenna to the IN side of the 30 dB attenuator. You will need to use the SMA female-female adapter if you didn’t pick up a male-female SMA cable.  
+10. Use the third SMA cable to connect the OUT side of the attenuator to the RX port on the SDR. Make sure the attenuator is on the RX side to help protect the SDR’s analog to digital convertor from any other signals that might be around. Be careful of the attenuator sliding off the bin and pulling on the cables. 
+11. Make sure to use the torque wrench to tighten all of the SMA connections 
+12. Plug in the USB 3.0 Micro B cable to connect the SDR to the Pi. Plug into the blue USB slots on the Pi. 
+13. Power the Raspberry Pi with the USB C 
+{{< figure src="../../../../images/outdoor-setup.png" alt="Example outdoor setup" width="500" >}}
+14. Connect your laptop to the Raspberry Pi. Either with the ethernet cable and ethernet to USB C convertor, through SSH with Wi-Fi, or thorugh SSH with the hotspot. 
+15. You are now set up to run the code, reference the “Running the Code” section above for additional instruction 
+16. Properly eject/shutdown equipment after experiment is completed. (Running `sudo shutdown`) 
