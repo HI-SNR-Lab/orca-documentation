@@ -12,6 +12,9 @@ title: Open Radar Code Architecture
 <a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/radioglaciology/uhd_radar/">
   Download <i class="fab fa-github ms-2 "></i>
 </a>
+<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://groups.google.com/a/colorado.edu/g/ecee-gg-open-radar">
+  Join the Mailing List <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+</a>
 <p class="lead mt-5">The Open Radar Code Architecture (ORCA) is a community-formed initiative created to make radar-sounding research accessible through open-source code, instruction manuals, and forums, enabling teams to use low-cost Software-Defined Radios (SDRs) as radars. </p>
 {{< blocks/link-down color="info" >}}
 {{< /blocks/cover >}}
