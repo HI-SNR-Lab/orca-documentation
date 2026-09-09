@@ -69,7 +69,7 @@ jobs:
         run: npm list adm-zip
       
       - name: Install postcss-cli
-        run: npm install -g postcss-cli && npm install autoprefixer && npm audit fix
+        run: npm install -g postcss-cli && npm install autoprefixer
   
       - name: Build with Hugo
         run: |
