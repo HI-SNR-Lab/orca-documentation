@@ -159,7 +159,9 @@ Now that all the variables are edited, you can run `test_loopback.py` and have a
 ## Outdoor Testing
 ### Testing with Antennas
 
-The instructions below are a general idea on how to conduct an outdoor test. It is very open to different changes that suit your needs.
+The instructions below are a general idea on how to conduct an outdoor test. It is very open to different changes that suit your needs. **Make sure to calculate the amount of power you are using so you don't break your equipment**
+
+**Testing Instructions**
 
 - Wagon/trolley to carry your supplies 
 - Large Plastic bins to use as a table or a table
