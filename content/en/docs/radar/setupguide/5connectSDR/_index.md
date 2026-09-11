@@ -72,22 +72,23 @@ To get any actual data from the SDR, we must both transmit and receive signals b
 7. Follow the Running the Code section below to run the program.
 
 ## Running the Code: 
-Now that you’re connected to the Pi and have hardware set up, you can run the code with the following commands: 
+Now that you’re connected to the Pi and have hardware set up, you can run the code with the following commands. Steps 2 through 5 and step 7 only need to be run the first time.
 
 1. run `cd uhd_radar/` 
 2. run `conda env create -n myenvironmentname -f environment.yaml` This makes your conda environment. `-n myenvironmentname` is optional, the default name specified in `environment.yaml` is `uhd`. If you are setting an environment up on a Raspberry Pi, we recommend using environment-rpi.yaml instead. This version includes additional dependencies used by manager/uav_payload_manager.py, a helper script designed to run only on Raspberry Pi-based radar instruments.
 3. run `sudo apt install make` and `sudo apt install cmake` 
 4. run `uhd_images_downloader`
-5. run `conda activate uhd`
-6. run `make hardware-test` and `make software-test` (if you made any changes to the default file, it will fail a software-test because it is looking for the default config settings)
-7. Check your config settings are set correctly with `nano config/<your-file>.yaml` (you may want to make a copy of the default.yaml file with `cp filename-you're-copying name-of-new-file`) Read [here](/docs/radar/sdr-interface/config) to learn about configuration options.
+5. run `uhd_find_devices` to check that your SDR is connected. You don't have to run this. 
+6. run `conda activate uhd`
+7. run `make hardware-test` and `make software-test` (if you made any changes to the default file, it will fail a software-test because it is looking for the default config settings)
+8. Check your config settings are set correctly with `nano config/<your-file>.yaml` (you may want to make a copy of the default.yaml file with `cp filename-you're-copying name-of-new-file`) Read [here](/docs/radar/sdr-interface/config) to learn about configuration options.
     - If you are using the B205-mini, make sure the following values in `RF0` (not RF1) section are set: 
         - `tx_gain` should **not** exceed ~80 dB
         - `rx_gain` should **not** exceed 76 dB
         - `tx_ant` should be set to `"TX/RX"`
         - `rx_ant` should be set to `"RX2"`
         - `transmit` should be set to `True`
-8. run `python run.py config/<your-file>.yaml` 
+9. run `python run.py config/<your-file>.yaml` 
     - If you have `num_pulses` set to `-1`, then you must stop the program with `Ctrl+C`
 
 {{% alert title="Helpful tip" color="info" %}}
@@ -104,7 +105,7 @@ If you want more information on how the code works, check out the [Runtime Overv
 {{% /alert %}}
 
 ### Plotting Data 
-There are two main files you can run to plot your received data. You can run `test_loopback.py` (under `/test_scripts` in `/postprocessing`) or `plot_samples.py` . At the moment, `plot_samples.py` does not print the correct distance in the terminal and `test_loopback.py` may print the correct distance. It does not work for the author's setup but it may work for other setups. `test_loopback.py` graphs the matched filter version which will show peaks at the correct distance which makes it better than the `plot_samples.py` script. 
+There are two main files you can run to plot your received data. You can run `test_loopback.py` (under `/test_scripts` in `/postprocessing`) or `plot_samples.py` . At the moment, `plot_samples.py` and `test_loopback.py` do not seem print the correct distance in the terminal for my setup. Not sure if it will be different for someone else. `test_loopback.py` graphs the matched filter version which will show peaks at the correct distance which makes it better than the `plot_samples.py` script. 
 
 #### Running `test_loopback.py`
 This code is currently only on the `gaby-branch` branch in the uhd_radar Github. For the loopback test to work correctly, you will need to edit the `zero_sample_idx`, `cable_length`, and `coax_length` which are in the **`loopback_testing.py` file**. 
@@ -114,11 +115,11 @@ This is how to edit the `zero_sample_idx`. You need to first run the code so you
 {{% alert title="Fun fact!" color="info" %}}
 rx_samps.bin is a binary file (.bin stands for binary), so if you try to open and read it in your powershell, it'll probably crash! But it does look cool to see a bunch of random symbols sprint past your screen. 
 {{% /alert %}}
-2. The zero sample index is easiest to see if you have the `rectangular` chirp window.
+2. The zero sample index is easiest to see if you have the `rectangular` chirp window (once you find this sample, you're free to use other chirp windows. The sample index will remain the same as long as the sample rate is the same).
 1. After running the loopback test with short SMA cables, scp the `_config.yaml` and `_rx_samps.bin` files from your Raspberry Pi onto your laptop. You want to save these in your branch/clone of the uhd_radar code under the data folder.
 2. Open the WSL terminal (you can do this in VSCode, hit CTRL + `, and use the dropdown arrow to change the terminal type to WSL) 
 3. Activate the conda environment with `conda activate environment-name`. You should already be in your uhd_radar folder but if not, `cd` into it
-4. Run `python processing/test_scripts/test_loopback.py data/timestamp_config.yaml` where timestamp is edited to whatever config file you have saved in data. 
+4. Run `python postprocessing/test_scripts/test_loopback.py data/timestamp_config.yaml` where timestamp is edited to whatever config file you have saved in data. 
 5. The first graph that appears is the chirp, you want to close this to allow the next graph to appear. The next graph will be matched filter, also close this.
 6. Here is an example of what the graph will look like. You want to use the magnifying glass and zoom in on the sharp corner. 
 {{< figure src="../../../../images/raw-matched-output.png" alt="Raw matched output graph" width="500" >}}
