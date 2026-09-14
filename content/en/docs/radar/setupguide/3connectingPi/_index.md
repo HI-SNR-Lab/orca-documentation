@@ -9,14 +9,19 @@ weight: 100
 
 ## Connecting to the Pi
 
-We will be using SSH to connect your laptop to the Pi. You can do this either over wifi or ethernet. Before doing this, we need to get the IP address of the Pi and import your public SSH key onto the Pi. 
+We will be using SSH to connect your laptop to the Pi. There there many ways to SSH, but before doing any SSH, you **need to use direct control** on the Pi to add the neccessary information to allow for SSH. 
+
+Below are the different types of SSH options you can choose from after you get the direct control set up. You do not need to do all three, just pick one you like. 
+
+<!--I used a website to create a table in markdown format which is why the code below may look a bit weird-->
+| Type                                | Explanation                                                                                                                                                                                                                                                        |
+|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SSH over ethernet                   | You will directly connect your laptop to the Pi via an ethernet cable and share your computer's internet access with the Pi. You can SSH into the Pi even if your laptop isn't connected to the internet (I think). This method seems to cause some issues if you're using a Mac and University Wi-Fi.  |
+| SSH over Wi-Fi                      | The Pi connects to a Wi-Fi network for interent access. If your laptop is connected to the same Wi-Fi, you'll be able to SSH into the Pi.                                                                                                                          |
+| SSH with the Pi acting as a hotspot | The Pi acts like a hotspot and emit's its own kind of Wi-Fi that your laptop can connect to. This then allows you to SSH into the Pi. Your laptop won't have internet access while it's connected to the Pi.                                                       |                                                    |
 
 ### Direct Control
 This is the process to get the IP address of the Pi and import your public SSH key. 
-
-{{% alert title="" color="info" %}}
-If you use your laptop's mobile hotspot, you will be able to see the IP address of the PI but you still need to do direct control to import your SSH key. 
-{{% /alert %}}
 
 This method requires a monitor and keyboard, cannot be used to share files between a laptop and the Pi, and is more difficult to use. However, we need to use this, mainly to import your SSH key. This is also useful in case the network-config isn't working. Direct control allows you to edit the file that controls this. 
 
@@ -87,7 +92,7 @@ Here is how to edit your network-config files without having to take the SD card
 You can log in and run commands directly with the keyboard (no mouse inputs). There is no way to scroll up through this terminal however, so if you want to be able to read a long output from a command you must pipe it into a file (ex. `python run.py >> terminal_output.txt`), then read the text file using nano. 
 
 ### Importing Your SSH Key
-You then need to add this SSH to the Pi. The simplest method is to first add the key to your GitHub account, then import it onto the Pi from there. If you don’t want to set up GitHub, you can add the key directly with a little extra work (though you may have typos which can make it difficult!).
+You don't need to do this to SSH into the Pi. I believe this is for if you edit the UHD_radar code on the Pi and try to push it to GitHub. The simplest method is to first add the key to your GitHub account, then import it onto the Pi from there. If you don’t want to set up GitHub, you can add the key directly with a little extra work (though you may have typos which can make it difficult!).
 
 **With GitHub:** 
 1. You should have already added the SSH key to your GitHub account.  
@@ -213,7 +218,7 @@ For this method, you will need:
 If you SSH into your pi from your laptop, you can type `exit` or `logout` to turn your powershell back to normal.
 {{% /alert %}}
 
-### SSH Over Hotspot:
+### SSH with Pi acting as Hotspot:
 This method is good for the outdoors where there is no Wifi/internet connection. It allows you to SSH into the Pi without internet connection, similar to SSH over ethernet, but you also won't need an ethernet cable. If you use this method, the Pi will not be able to access a Wi-Fi internet connection at the same time, so you won't be able to clone the repository or pull from the repository. This setup will require direct control, but afterwards you won't need direct control again.
 
 For this method, you will need:
