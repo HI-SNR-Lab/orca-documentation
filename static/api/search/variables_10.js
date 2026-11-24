@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['this_5fsig_0',['this_sig',['../namespacenoise__test.html#a6956435035a66e161ed9496a9e625ffb',1,'noise_test']]],
+  ['this_5fsnr_1',['this_snr',['../namespacenoise__test.html#a6341f2b4688415e7c35a9d1eccbd3073',1,'noise_test']]],
+  ['tilt_5fof_5fplane_2',['tilt_of_plane',['../namespaceauto__amplification.html#a04e83ef0fb98fdb9e11ebcb59552d64b',1,'auto_amplification']]],
+  ['time_5foffset_3',['time_offset',['../classChirp.html#a9dc8c39f23baa218fae0df11a1119b21',1,'Chirp']]],
+  ['timeout_5fs_4',['timeout_s',['../namespaceerror__code__late__command__sweep.html#ab11cb4d6be1d39a69fe5a939459ccda8',1,'error_code_late_command_sweep']]],
+  ['timestamp_5',['timestamp',['../namespacetest__loopback.html#a81c74c2b4ddb47f9a986d9d130d1c5d2',1,'test_loopback.timestamp'],['../namespaceplot__samples.html#ab768dcb9bfdb23f09b6d4ed36e2da8b9',1,'plot_samples.timestamp']]],
+  ['total_6',['total',['../namespacenoise__test.html#a69d26e93540fa3fdfcedaedc7b71bbea',1,'noise_test']]],
+  ['tr_5foff_5fdelay_7',['tr_off_delay',['../main_8cpp.html#afbb942eb48b698543958ed598b49b8d3',1,'main.cpp']]],
+  ['tr_5foff_5ftrail_8',['tr_off_trail',['../classChirp.html#a0bfb94d864c79e573756753f8d2f1701',1,'Chirp']]],
+  ['tr_5fon_5flead_9',['tr_on_lead',['../classChirp.html#a85db923a284c5944cb6baeff165e1997',1,'Chirp']]],
+  ['transmit_10',['transmit',['../classSdr.html#ab371c34206d9a8868d43b2db3c026b68',1,'Sdr']]],
+  ['transmit_5fpower_11',['transmit_power',['../namespaceauto__amplification.html#a6cd7d72d78fe432b71f229a23f1f507c',1,'auto_amplification']]],
+  ['true_12',['True',['../namespacepermanent__storage.html#a749ae33d62fe1ee6f168b5fd510a6a6c',1,'permanent_storage']]],
+  ['tx_5fant_13',['tx_ant',['../classSdr.html#a17de3de44b0ce60e1771c938bc36abcf',1,'Sdr']]],
+  ['tx_5fchannel_5fnums_14',['tx_channel_nums',['../classSdr.html#a2d02c2ba56bc95f9a96aadd6a13d3dc7',1,'Sdr']]],
+  ['tx_5fchannel_5fstrings_15',['tx_channel_strings',['../classSdr.html#afc6ae5f12f3a96d6db2ce49dd8c0a35a',1,'Sdr']]],
+  ['tx_5fchannels_16',['tx_channels',['../classSdr.html#a9de28bd2f493caf05de19b6cdeab4b41',1,'Sdr']]],
+  ['tx_5fduration_17',['tx_duration',['../classChirp.html#ac67a8bb128d3aa49a55e4507c312adb8',1,'Chirp']]],
+  ['tx_5fgain_18',['tx_gain',['../namespaceauto__amplification.html#ae709043d729c0f15e6c3916262b8a781',1,'auto_amplification.tx_gain'],['../classSdr.html#a485ecea22857d3007883f05d082b2573',1,'Sdr::tx_gain']]],
+  ['tx_5flead_19',['tx_lead',['../classChirp.html#a35b8d0ed6c1624b001470d5a9c1b6e97',1,'Chirp']]],
+  ['tx_5frate_20',['tx_rate',['../classSdr.html#ad62accfbec613786f1a140df581d41eb',1,'Sdr']]],
+  ['tx_5fsig_21',['tx_sig',['../namespacenoise__test.html#a863be2a58c172d519d731b53a1363b12',1,'noise_test.tx_sig'],['../namespaceplot__samples.html#afb9a414852fa01387c9c66a3f4a87ab6',1,'plot_samples.tx_sig'],['../namespacetest__loopback.html#a978bf781209984241d1b4a12d50d798e',1,'test_loopback.tx_sig']]],
+  ['tx_5fstream_22',['tx_stream',['../classSdr.html#ac07b6b3624b4a57a3ab4320f697b5e74',1,'Sdr']]]
+];

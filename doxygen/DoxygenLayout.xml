@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doxygen's default menu plus one extra entry that leads back to the ORCA documentation site. -->
+<doxygenlayout version="1.0">
+  <navindex>
+    <tab type="mainpage" visible="yes" title=""/>
+    <tab type="pages" visible="yes" title="" intro=""/>
+    <tab type="namespaces" visible="yes" title="">
+      <tab type="namespacelist" visible="yes" title="" intro=""/>
+      <tab type="namespacemembers" visible="yes" title="" intro=""/>
+    </tab>
+    <tab type="classes" visible="yes" title="">
+      <tab type="classlist" visible="yes" title="" intro=""/>
+      <tab type="classindex" visible="$ALPHABETICAL_INDEX" title=""/>
+      <tab type="hierarchy" visible="yes" title="" intro=""/>
+      <tab type="classmembers" visible="yes" title="" intro=""/>
+    </tab>
+    <tab type="files" visible="yes" title="">
+      <tab type="filelist" visible="yes" title="" intro=""/>
+      <tab type="globals" visible="yes" title="" intro=""/>
+    </tab>
+    <tab type="user" url="../docs/radar/code-reference/" title="Back to ORCA docs"/>
+  </navindex>
+</doxygenlayout>

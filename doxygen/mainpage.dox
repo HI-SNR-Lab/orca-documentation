@@ -1,0 +1,29 @@
+/**
+@mainpage ORCA code reference
+
+[Back to the ORCA documentation](../docs/radar/code-reference/)
+
+This is the reference for the code in [uhd_radar](https://github.com/HI-SNR-Lab/uhd_radar),
+the repository behind the Open Radar Code Architecture (ORCA). Doxygen builds it from the code
+and from the comments in the code, so it describes the code exactly as it was at the commit
+shown at the top of this page.
+
+## Where to start
+
+| To understand... | Look at |
+| --- | --- |
+| how a whole run is put together | run.py and the run.RadarProcessRunner class |
+| how the chirp is generated before a run | generate_chirp.py |
+| the program that talks to the radio | main.cpp, with the Sdr and Chirp classes |
+| how recorded data is loaded and processed | processing.py and processing_dask.py |
+| the unit tests | the files under tests/ |
+
+Use **Classes** for the C++ classes, **Namespaces** for the Python modules and **Files** to browse
+by folder. Every function page links to its source code.
+
+## Why some functions have no description
+
+Doxygen only shows comments written in its own format. The format the project uses is described under
+"Doxygen Requirements" in STYLEGUIDE.md. The page "Documentation coverage" on the ORCA documentation
+site lists the functions that still need a comment.
+*/
