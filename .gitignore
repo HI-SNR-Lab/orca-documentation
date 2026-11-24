@@ -4,3 +4,6 @@
 node_modules/
 package-lock.json
 .hugo_build.lock
+# Doxygen working files (the generated site lives in static/api/)
+doxygen/_build/
+__pycache__/

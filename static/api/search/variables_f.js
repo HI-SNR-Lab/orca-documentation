@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['sample_5frate_0',['sample_rate',['../namespacenoise__test.html#a80b3c015e0ad9ad0f9430bd06e3c94c7',1,'noise_test.sample_rate'],['../namespaceplot__samples.html#a8fc1aefd256a2c087e33643bcc0c77a8',1,'plot_samples.sample_rate'],['../namespacetest__loopback.html#aa17ff6c5f38b21922ddcabe5130168a7',1,'test_loopback.sample_rate']]],
+  ['samps_5fper_1',['samps_per',['../namespacenoise__test.html#ab7681d5e8a4755e4ab0cc63310307d41',1,'noise_test']]],
+  ['save_5floc_2',['save_loc',['../main_8cpp.html#a8e25041a5c50a2f80b4785c8238606f1',1,'main.cpp']]],
+  ['scattering_5fcurrent_3',['scattering_current',['../namespaceauto__amplification.html#a5d72c22adebd751d6fb3d999c5a1a586',1,'auto_amplification']]],
+  ['scattering_5fmax_4',['scattering_max',['../namespaceauto__amplification.html#adb23265c8cf7ea2527475362f894b0d9',1,'auto_amplification']]],
+  ['secax_5',['secax',['../namespaceerror__code__late__command__sweep.html#a880f5f85bb756fbb49f70802ecab5f4f',1,'error_code_late_command_sweep']]],
+  ['setup_5fcomplete_6',['setup_complete',['../classrun_1_1RadarProcessRunner.html#a3b227eb5c380003fa89f7544c6cc32bf',1,'run::RadarProcessRunner']]],
+  ['show_5fgraphs_7',['show_graphs',['../namespacenoise__test.html#a691ac1b88224fe63e1c52c00dce7eac6',1,'noise_test']]],
+  ['sig_5fspeed_8',['sig_speed',['../namespaceplot__samples.html#a5a2f5cd0df608285afcbfd13790df7e1',1,'plot_samples.sig_speed'],['../namespacetest__loopback.html#a4dd63ed35938d582121a7c919f37b1fa',1,'test_loopback.sig_speed']]],
+  ['signals_9',['signals',['../namespacenoise__test.html#aabccbc05a1389901bc3391620228be1c',1,'noise_test']]],
+  ['snrs_10',['snrs',['../namespacenoise__test.html#a1d21c48c657b20c0cb4c03929fc8a206',1,'noise_test']]],
+  ['source_5fdir_11',['source_dir',['../namespacepermanent__storage.html#ab65b7228065b135faac6e52479d0e517',1,'permanent_storage']]],
+  ['specular_5freflection_5fcoeff_5fcurrent_12',['specular_reflection_coeff_current',['../namespaceauto__amplification.html#a1ac9ea05647acc099f056a43ca9ed185',1,'auto_amplification']]],
+  ['specular_5freflection_5fcoeff_5fmax_13',['specular_reflection_coeff_max',['../namespaceauto__amplification.html#aed37db7f77a078c9feca5cbeef6797c8',1,'auto_amplification']]],
+  ['stop_5fsignal_5fcalled_14',['stop_signal_called',['../main_8cpp.html#a69461f8fd7763b57d9dbd53598915011',1,'main.cpp']]],
+  ['str_5farg_15',['str_arg',['../namespacetest__loopback.html#a6b8c752f4b25c1ba062859c04846c591',1,'test_loopback.str_arg'],['../namespaceplot__samples.html#ae79485485da7d7948fc44931aba0eac5',1,'plot_samples.str_arg']]],
+  ['subdev_16',['subdev',['../classSdr.html#a74def2fe825189d440e1883d6d90cef2',1,'Sdr']]]
+];

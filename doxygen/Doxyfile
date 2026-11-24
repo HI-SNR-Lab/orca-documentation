@@ -1,0 +1,51 @@
+# Doxygen settings for the ORCA code reference.
+#
+# Do not run "doxygen" on this file directly. Run
+#     python3 doxygen/generate_api_docs.py
+# which sets the three ORCA_* variables used below and copies the result into the site.
+#
+# Only settings that differ from Doxygen's defaults are listed here.
+# Checked with Doxygen 1.9.8.
+
+PROJECT_NAME           = "ORCA"
+PROJECT_BRIEF          = "Open Radar Code Architecture: code reference"
+PROJECT_NUMBER         = "$(ORCA_VERSION)"
+
+# ---- What to read: one working folder that the script fills with the uhd_radar code files
+# (*.py, *.cpp, *.hpp) and the front page (mainpage.dox, next to this file).
+INPUT                  = "$(ORCA_INPUT_DIR)"
+RECURSIVE              = YES
+FULL_PATH_NAMES        = YES
+STRIP_FROM_PATH        = "$(ORCA_INPUT_DIR)"
+
+# ---- What to show: everything, including code that has no Doxygen comment yet.
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+JAVADOC_AUTOBRIEF      = YES
+PYTHON_DOCSTRING       = NO
+SOURCE_BROWSER         = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+# ---- Output: HTML for the site, XML for the coverage page. Both go to a build folder first.
+OUTPUT_DIRECTORY       = "$(ORCA_BUILD_DIR)"
+HTML_OUTPUT            = html
+GENERATE_TREEVIEW      = YES
+LAYOUT_FILE            = DoxygenLayout.xml
+TIMESTAMP              = NO
+GENERATE_LATEX         = NO
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
+XML_PROGRAMLISTING     = NO
+
+# ---- Diagrams are off. This keeps the generated site small (about 300 files instead of 1,100)
+# and identical on every computer, with or without Graphviz installed.
+# For call graphs and include graphs: install Graphviz, set HAVE_DOT = YES and remove the two "#".
+HAVE_DOT               = NO
+#CALL_GRAPH             = YES
+#CALLER_GRAPH           = YES
+
+# ---- Messages: keep the screen quiet, keep the warnings in a file for the coverage page.
+QUIET                  = YES
+WARN_LOGFILE           = "$(ORCA_BUILD_DIR)/doxygen_warnings.log"
