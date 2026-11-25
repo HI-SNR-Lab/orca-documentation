@@ -231,7 +231,7 @@ For this method, you will need:
 1. This method uses NetworkManager and your Pi's connections need to be controlled with NetworkManager. Check if your netplan's renderer is NetworkManager, if not, change it to NetworkManager. 
    1. Run `ls /etc/netplan/`. It should show a .yaml.
    2. Run `sudo nano /etc/netplan/FILENAME.yaml`. This allows you to open and edit the file. 
-   3. Change whatever you need to, then hit `CTRL + X`, then `y`, then hit enter. This saves your edits.
+   3. Change the "renderer" to `NetworkManager`, then hit `CTRL + X`, then `y`, then hit enter. This saves your edits.
    4. Run `sudo netplan apply` to apply these changes
    5. Try `ping 8.8.8.8` again to see if is connected now. Hit `Ctrl + C` to stop the pinging and check that there is no packet loss. 
    6. You may need to run `sudo reboot`
